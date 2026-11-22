@@ -101,14 +101,77 @@
             outline-offset: 2px;
         }
 
-        /* MOTION 2: Editorial horizontal mask reveal & staggered card transitions */
+        /* MOTION 3: Scroll progress hairline, hero mask choreography, spotlight cards, & modal transitions */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--accent);
+            transform-origin: 0 50%;
+            transform: scaleX(0);
+            z-index: 60;
+            pointer-events: none;
+        }
+
+        .nav-underline {
+            position: relative;
+        }
+
+        .nav-underline::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0.35rem;
+            height: 1.5px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .nav-underline:hover::after,
+        .nav-underline:focus-visible::after {
+            transform: scaleX(1);
+        }
+
+        html.js-anim .hero-reveal {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            transition-delay: var(--d, 0ms);
+        }
+
+        html.js-anim.hero-ready .hero-reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        html.js-anim .hero-name-mask {
+            overflow: hidden;
+        }
+
+        html.js-anim .hero-name-mask > span {
+            display: inline-block;
+            transform: translateY(105%);
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transition-delay: 80ms;
+        }
+
+        html.js-anim.hero-ready .hero-name-mask > span {
+            transform: translateY(0);
+        }
+
         html.js-anim .reveal-item {
             opacity: 0;
             clip-path: inset(0 4% 0 0);
-            transform: translateX(-12px);
-            transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-                        transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-                        clip-path 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+            transform: translateX(-14px);
+            transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                        clip-path 0.65s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         html.js-anim .reveal-item.is-visible {
@@ -117,15 +180,79 @@
             transform: translateX(0);
         }
 
+        .spotlight-card {
+            position: relative;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .spotlight-card::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                border-radius: inherit;
+                background: radial-gradient(
+                    360px circle at var(--mx, 50%) var(--my, 50%),
+                    rgba(15, 118, 110, 0.065),
+                    transparent 65%
+                );
+                opacity: 0;
+                transition: opacity 0.3s ease;
+                pointer-events: none;
+            }
+
+            html.dark .spotlight-card::before {
+                background: radial-gradient(
+                    360px circle at var(--mx, 50%) var(--my, 50%),
+                    rgba(45, 212, 191, 0.08),
+                    transparent 65%
+                );
+            }
+
+            .spotlight-card:hover::before {
+                opacity: 1;
+            }
+
+            .spotlight-card:hover {
+                transform: translateY(-2px);
+            }
+        }
+
         .project-card {
-            transition: opacity 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-                        transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+            transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
                         border-color 0.2s ease;
         }
 
         .project-card.is-filtering-out {
             opacity: 0;
-            transform: scale(0.97);
+            transform: scale(0.96);
+        }
+
+        button:active:not(:disabled),
+        a[href]:active {
+            transform: scale(0.985);
+        }
+
+        /* Modal entrance & exit */
+        #project-modal {
+            opacity: 0;
+            transition: opacity 0.22s ease;
+        }
+
+        #project-modal.is-open {
+            opacity: 1;
+        }
+
+        #project-modal-panel {
+            opacity: 0;
+            transform: translateY(14px) scale(0.97);
+            transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        #project-modal.is-open #project-modal-panel {
+            opacity: 1;
+            transform: translateY(0) scale(1);
         }
 
         /* R-39: Respect reduced motion */
@@ -136,9 +263,14 @@
                 transition-duration: 0.01ms !important;
                 scroll-behavior: auto !important;
             }
-            html.js-anim .reveal-item {
+            html.js-anim .reveal-item,
+            html.js-anim .hero-reveal,
+            html.js-anim .hero-name-mask > span {
                 opacity: 1 !important;
                 clip-path: none !important;
+                transform: none !important;
+            }
+            .spotlight-card:hover {
                 transform: none !important;
             }
         }
@@ -162,6 +294,7 @@
 </head>
 <body class="antialiased selection:bg-pine selection:text-white dark:selection:bg-tealBright dark:selection:text-night">
 
+    <div id="scroll-progress" aria-hidden="true"></div>
     <a href="#konten-utama" class="skip-link">Langsung ke konten utama</a>
 
     <!-- ================= HEADER & NAVIGASI ================= -->
@@ -173,11 +306,11 @@
                 </a>
 
                 <nav aria-label="Navigasi utama" class="hidden md:flex items-center gap-6 text-sm font-medium text-inkMuted dark:text-nightMuted">
-                    <a href="#tentang" class="hover:text-ink dark:hover:text-nightInk transition-colors py-2.5">Tentang</a>
-                    <a href="#pengalaman" class="hover:text-ink dark:hover:text-nightInk transition-colors py-2.5">Pengalaman</a>
-                    <a href="#proyek" class="hover:text-ink dark:hover:text-nightInk transition-colors py-2.5">Studi Kasus</a>
-                    <a href="#keahlian" class="hover:text-ink dark:hover:text-nightInk transition-colors py-2.5">Keahlian</a>
-                    <a href="#kontak" class="hover:text-ink dark:hover:text-nightInk transition-colors py-2.5">Kontak</a>
+                    <a href="#tentang" class="nav-underline hover:text-ink dark:hover:text-nightInk transition-colors py-2.5">Tentang</a>
+                    <a href="#pengalaman" class="nav-underline hover:text-ink dark:hover:text-nightInk transition-colors py-2.5">Pengalaman</a>
+                    <a href="#proyek" class="nav-underline hover:text-ink dark:hover:text-nightInk transition-colors py-2.5">Studi Kasus</a>
+                    <a href="#keahlian" class="nav-underline hover:text-ink dark:hover:text-nightInk transition-colors py-2.5">Keahlian</a>
+                    <a href="#kontak" class="nav-underline hover:text-ink dark:hover:text-nightInk transition-colors py-2.5">Kontak</a>
                 </nav>
 
                 <div class="flex items-center gap-2">
@@ -229,19 +362,19 @@
         <section class="py-12 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto border-b border-zinc-200 dark:border-zinc-800">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
                 <div class="lg:col-span-7 space-y-6">
-                    <p class="font-mono text-xs sm:text-sm text-pine dark:text-tealBright">
+                    <p class="hero-reveal font-mono text-xs sm:text-sm text-pine dark:text-tealBright" style="--d: 0ms;">
                         Tangerang, Banten / Teknik Informatika &amp; Analisis Data
                     </p>
 
-                    <h1 class="font-serif font-semibold tracking-tight text-ink dark:text-nightInk leading-[1.12]" style="font-size: clamp(2.25rem, 5vw, 3.5rem);">
-                        Shafwan Mumtaz
+                    <h1 class="hero-name-mask font-serif font-semibold tracking-tight text-ink dark:text-nightInk leading-[1.12]" style="font-size: clamp(2.25rem, 5vw, 3.5rem);">
+                        <span>Shafwan Mumtaz</span>
                     </h1>
 
-                    <p class="text-base sm:text-lg text-inkMuted dark:text-nightMuted leading-relaxed max-w-2xl">
+                    <p class="hero-reveal text-base sm:text-lg text-inkMuted dark:text-nightMuted leading-relaxed max-w-2xl" style="--d: 160ms;">
                         Mahasiswa S1 Teknik Informatika di <strong class="font-semibold text-ink dark:text-nightInk">Universitas Pamulang</strong> dan staf operasional di <strong class="font-semibold text-ink dark:text-nightInk">PT Mumtaz Catering</strong>. Terbiasa mengolah catatan distribusi B2B dan membersihkan dataset menggunakan Python, Microsoft Excel, dan SQL menjadi laporan yang siap dipakai mengambil keputusan.
                     </p>
 
-                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
+                    <div class="hero-reveal flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2" style="--d: 240ms;">
                         <a href="#proyek" class="min-h-[44px] px-6 py-3 rounded-md bg-pine dark:bg-tealBright text-white dark:text-night font-semibold text-sm hover:opacity-90 transition-opacity flex items-center justify-center">
                             Lihat 6 Studi Kasus
                         </a>
@@ -255,7 +388,7 @@
                 </div>
 
                 <!-- Ringkasan Fakta Terstruktur -->
-                <aside aria-label="Ringkasan profil" class="lg:col-span-5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-nightAlt p-5 sm:p-6">
+                <aside aria-label="Ringkasan profil" class="hero-reveal spotlight-card lg:col-span-5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-nightAlt p-5 sm:p-6 transition-colors" style="--d: 180ms;">
                     <h2 class="font-mono text-xs uppercase tracking-wider text-inkMuted dark:text-nightMuted pb-3 mb-4 border-b border-zinc-200 dark:border-zinc-800">
                         Ringkasan Fakta
                     </h2>
@@ -745,7 +878,7 @@
 
     <!-- ================= MODAL DETAIL STUDI KASUS ================= -->
     <div id="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-zinc-950/75">
-        <div class="rounded-lg max-w-2xl w-full p-6 sm:p-8 relative bg-white dark:bg-nightAlt border border-zinc-200 dark:border-zinc-700 max-h-[90vh] overflow-y-auto">
+        <div id="project-modal-panel" class="rounded-lg max-w-2xl w-full p-6 sm:p-8 relative bg-white dark:bg-nightAlt border border-zinc-200 dark:border-zinc-700 max-h-[90vh] overflow-y-auto">
             <button type="button" id="modal-close-btn" onclick="closeProjectModal()" aria-label="Tutup detail studi kasus" class="min-h-[44px] min-w-[44px] absolute top-4 right-4 rounded-md border border-zinc-300 dark:border-zinc-700 text-ink dark:text-nightInk hover:border-pine dark:hover:border-tealBright flex items-center justify-center transition-colors">
                 <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                     <path d="M18 6L6 18M6 6l12 12"></path>
@@ -795,6 +928,43 @@
     <!-- ================= JAVASCRIPT ================= -->
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Hero entrance choreography
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                document.documentElement.classList.add('hero-ready');
+            });
+        });
+
+        // Scroll progress hairline (GPU-composited scaleX)
+        const scrollProgress = document.getElementById('scroll-progress');
+        let scrollTicking = false;
+        function updateScrollProgress() {
+            const doc = document.documentElement;
+            const maxScroll = doc.scrollHeight - doc.clientHeight;
+            const ratio = maxScroll > 0 ? Math.min(Math.max(window.scrollY / maxScroll, 0), 1) : 0;
+            scrollProgress.style.transform = 'scaleX(' + ratio + ')';
+            scrollTicking = false;
+        }
+        window.addEventListener('scroll', () => {
+            if (!scrollTicking) {
+                scrollTicking = true;
+                requestAnimationFrame(updateScrollProgress);
+            }
+        }, { passive: true });
+        updateScrollProgress();
+
+        // Desktop cursor-reactive spotlight on cards
+        if (window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+            document.querySelectorAll('.project-card, .spotlight-card').forEach(card => {
+                card.classList.add('spotlight-card');
+                card.addEventListener('pointermove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    card.style.setProperty('--mx', (e.clientX - rect.left) + 'px');
+                    card.style.setProperty('--my', (e.clientY - rect.top) + 'px');
+                });
+            });
+        }
 
         // Toggle Tema Terang / Gelap
         const themeToggle = document.getElementById('theme-toggle');
@@ -993,15 +1163,23 @@
 
             modal.classList.remove('hidden');
             modal.classList.add('flex');
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    modal.classList.add('is-open');
+                });
+            });
             modalCloseBtn.focus();
         }
 
         function closeProjectModal() {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-            if (lastFocusedTrigger && typeof lastFocusedTrigger.focus === 'function') {
-                lastFocusedTrigger.focus();
-            }
+            modal.classList.remove('is-open');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                if (lastFocusedTrigger && typeof lastFocusedTrigger.focus === 'function') {
+                    lastFocusedTrigger.focus();
+                }
+            }, 220);
         }
 
         modal.addEventListener('click', (e) => {
