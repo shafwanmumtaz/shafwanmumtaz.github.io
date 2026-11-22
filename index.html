@@ -36,16 +36,19 @@
                         mono: ['IBM Plex Mono', 'monospace'],
                     },
                     colors: {
-                        paper: '#FAF9F6',
-                        paperAlt: '#F3F1EC',
-                        ink: '#18181B',
-                        inkMuted: '#52525B',
-                        pine: '#0F766E',
-                        night: '#111315',
-                        nightAlt: '#1A1D21',
-                        nightInk: '#F4F4F5',
-                        nightMuted: '#A1A1AA',
-                        tealBright: '#2DD4BF',
+                        paper: '#F4EFE6',
+                        paperAlt: '#EAE2D6',
+                        ivory: '#FFFDF9',
+                        sand: '#D6CBB8',
+                        ink: '#1F1A17',
+                        inkMuted: '#5C5147',
+                        terracotta: '#B44323',
+                        night: '#161210',
+                        nightAlt: '#211B18',
+                        nightBorder: '#3B312B',
+                        nightInk: '#F5EFE6',
+                        nightMuted: '#B8ABA0',
+                        copper: '#E8855E',
                     }
                 }
             }
@@ -54,25 +57,25 @@
 
     <style>
         :root {
-            --bg-page: #FAF9F6;
-            --bg-surface: #FFFFFF;
-            --bg-subtle: #F3F1EC;
-            --text-primary: #18181B;
-            --text-muted: #52525B;
-            --border-color: #E4E4E7;
-            --accent: #0F766E;
-            --accent-ink: #FFFFFF;
+            --bg-page: #F4EFE6;
+            --bg-surface: #FFFDF9;
+            --bg-subtle: #EAE2D6;
+            --text-primary: #1F1A17;
+            --text-muted: #5C5147;
+            --border-color: #D6CBB8;
+            --accent: #B44323;
+            --accent-ink: #FFFDF9;
         }
 
         html.dark {
-            --bg-page: #111315;
-            --bg-surface: #1A1D21;
-            --bg-subtle: #20242A;
-            --text-primary: #F4F4F5;
-            --text-muted: #A1A1AA;
-            --border-color: #27272A;
-            --accent: #2DD4BF;
-            --accent-ink: #111315;
+            --bg-page: #161210;
+            --bg-surface: #211B18;
+            --bg-subtle: #2C2420;
+            --text-primary: #F5EFE6;
+            --text-muted: #B8ABA0;
+            --border-color: #3B312B;
+            --accent: #E8855E;
+            --accent-ink: #161210;
         }
 
         body {
@@ -192,7 +195,7 @@
                 border-radius: inherit;
                 background: radial-gradient(
                     360px circle at var(--mx, 50%) var(--my, 50%),
-                    rgba(15, 118, 110, 0.065),
+                    rgba(180, 67, 35, 0.08),
                     transparent 65%
                 );
                 opacity: 0;
@@ -203,7 +206,7 @@
             html.dark .spotlight-card::before {
                 background: radial-gradient(
                     360px circle at var(--mx, 50%) var(--my, 50%),
-                    rgba(45, 212, 191, 0.08),
+                    rgba(232, 133, 94, 0.10),
                     transparent 65%
                 );
             }
@@ -292,16 +295,16 @@
         }
     </style>
 </head>
-<body class="antialiased selection:bg-pine selection:text-white dark:selection:bg-tealBright dark:selection:text-night">
+<body class="antialiased selection:bg-terracotta selection:text-ivory dark:selection:bg-copper dark:selection:text-night">
 
     <div id="scroll-progress" aria-hidden="true"></div>
     <a href="#konten-utama" class="skip-link">Langsung ke konten utama</a>
 
     <!-- ================= HEADER & NAVIGASI ================= -->
-    <header class="sticky top-0 z-40 border-b border-zinc-200 dark:border-zinc-800 bg-paper/95 dark:bg-night/95">
+    <header class="sticky top-0 z-40 border-b border-sand dark:border-nightBorder bg-paper/95 dark:bg-night/95">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16 gap-4">
-                <a href="#" class="font-serif text-xl font-semibold tracking-tight text-ink dark:text-nightInk hover:text-pine dark:hover:text-tealBright transition-colors py-2">
+                <a href="#" class="font-serif text-xl font-semibold tracking-tight text-ink dark:text-nightInk hover:text-terracotta dark:hover:text-copper transition-colors py-2">
                     Shafwan Mumtaz
                 </a>
 
@@ -319,7 +322,7 @@
                         id="theme-toggle"
                         aria-label="Ubah tema terang atau gelap"
                         aria-pressed="false"
-                        class="min-h-[44px] min-w-[44px] px-3 rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-nightAlt text-ink dark:text-nightInk hover:border-pine dark:hover:border-tealBright text-xs font-mono flex items-center justify-center gap-2 transition-colors"
+                        class="min-h-[44px] min-w-[44px] px-3 rounded-md border border-sand dark:border-nightBorder bg-ivory dark:bg-nightAlt text-ink dark:text-nightInk hover:border-terracotta dark:hover:border-copper text-xs font-mono flex items-center justify-center gap-2 transition-colors"
                     >
                         <svg id="icon-sun" class="w-4 h-4 hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                             <circle cx="12" cy="12" r="4"></circle>
@@ -337,7 +340,7 @@
                         aria-label="Buka menu navigasi"
                         aria-expanded="false"
                         aria-controls="mobile-menu"
-                        class="md:hidden min-h-[44px] min-w-[44px] px-3 rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-nightAlt text-ink dark:text-nightInk text-sm font-medium flex items-center justify-center gap-1.5"
+                        class="md:hidden min-h-[44px] min-w-[44px] px-3 rounded-md border border-sand dark:border-nightBorder bg-ivory dark:bg-nightAlt text-ink dark:text-nightInk text-sm font-medium flex items-center justify-center gap-1.5"
                     >
                         <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                             <path d="M3 6h18M3 12h18M3 18h18"></path>
@@ -348,21 +351,21 @@
             </div>
         </div>
 
-        <nav id="mobile-menu" aria-label="Navigasi seluler" class="hidden md:hidden border-t border-zinc-200 dark:border-zinc-800 bg-paper dark:bg-night px-4 py-3 space-y-1">
+        <nav id="mobile-menu" aria-label="Navigasi seluler" class="hidden md:hidden border-t border-sand dark:border-nightBorder bg-paper dark:bg-night px-4 py-3 space-y-1">
             <a href="#tentang" class="mobile-link block px-3 py-3 rounded-md text-sm font-medium text-ink dark:text-nightInk hover:bg-paperAlt dark:hover:bg-nightAlt">Tentang</a>
             <a href="#pengalaman" class="mobile-link block px-3 py-3 rounded-md text-sm font-medium text-ink dark:text-nightInk hover:bg-paperAlt dark:hover:bg-nightAlt">Pengalaman</a>
             <a href="#proyek" class="mobile-link block px-3 py-3 rounded-md text-sm font-medium text-ink dark:text-nightInk hover:bg-paperAlt dark:hover:bg-nightAlt">Studi Kasus</a>
             <a href="#keahlian" class="mobile-link block px-3 py-3 rounded-md text-sm font-medium text-ink dark:text-nightInk hover:bg-paperAlt dark:hover:bg-nightAlt">Keahlian</a>
-            <a href="#kontak" class="mobile-link block px-3 py-3 rounded-md text-sm font-semibold text-pine dark:text-tealBright hover:bg-paperAlt dark:hover:bg-nightAlt">Kontak</a>
+            <a href="#kontak" class="mobile-link block px-3 py-3 rounded-md text-sm font-semibold text-terracotta dark:text-copper hover:bg-paperAlt dark:hover:bg-nightAlt">Kontak</a>
         </nav>
     </header>
 
     <main id="konten-utama">
         <!-- ================= HERO SECTION ================= -->
-        <section class="py-12 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto border-b border-zinc-200 dark:border-zinc-800">
+        <section class="py-12 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto border-b border-sand dark:border-nightBorder">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
                 <div class="lg:col-span-7 space-y-6">
-                    <p class="hero-reveal font-mono text-xs sm:text-sm text-pine dark:text-tealBright" style="--d: 0ms;">
+                    <p class="hero-reveal font-mono text-xs sm:text-sm text-terracotta dark:text-copper" style="--d: 0ms;">
                         Tangerang, Banten / Teknik Informatika &amp; Analisis Data
                     </p>
 
@@ -375,10 +378,10 @@
                     </p>
 
                     <div class="hero-reveal flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2" style="--d: 240ms;">
-                        <a href="#proyek" class="min-h-[44px] px-6 py-3 rounded-md bg-pine dark:bg-tealBright text-white dark:text-night font-semibold text-sm hover:opacity-90 transition-opacity flex items-center justify-center">
+                        <a href="#proyek" class="min-h-[44px] px-6 py-3 rounded-md bg-terracotta dark:bg-copper text-ivory dark:text-night font-semibold text-sm hover:opacity-90 transition-opacity flex items-center justify-center">
                             Lihat 6 Studi Kasus
                         </a>
-                        <a href="https://github.com/shafwanmumtaz" target="_blank" rel="noopener noreferrer" class="min-h-[44px] px-6 py-3 rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-nightAlt text-ink dark:text-nightInk hover:border-pine dark:hover:border-tealBright font-semibold text-sm transition-colors flex items-center justify-center gap-2">
+                        <a href="https://github.com/shafwanmumtaz" target="_blank" rel="noopener noreferrer" class="min-h-[44px] px-6 py-3 rounded-md border border-sand dark:border-nightBorder bg-ivory dark:bg-nightAlt text-ink dark:text-nightInk hover:border-terracotta dark:hover:border-copper font-semibold text-sm transition-colors flex items-center justify-center gap-2">
                             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
                             </svg>
@@ -388,26 +391,26 @@
                 </div>
 
                 <!-- Ringkasan Fakta Terstruktur -->
-                <aside aria-label="Ringkasan profil" class="hero-reveal spotlight-card lg:col-span-5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-nightAlt p-5 sm:p-6 transition-colors" style="--d: 180ms;">
-                    <h2 class="font-mono text-xs uppercase tracking-wider text-inkMuted dark:text-nightMuted pb-3 mb-4 border-b border-zinc-200 dark:border-zinc-800">
+                <aside aria-label="Ringkasan profil" class="hero-reveal spotlight-card lg:col-span-5 rounded-lg border border-sand dark:border-nightBorder bg-ivory dark:bg-nightAlt p-5 sm:p-6 transition-colors" style="--d: 180ms;">
+                    <h2 class="font-mono text-xs uppercase tracking-wider text-inkMuted dark:text-nightMuted pb-3 mb-4 border-b border-sand dark:border-nightBorder">
                         Ringkasan Fakta
                     </h2>
                     <dl class="space-y-3.5 text-sm">
-                        <div class="flex flex-col sm:flex-row sm:justify-between gap-1 pb-3 border-b border-zinc-100 dark:border-zinc-800/80">
+                        <div class="flex flex-col sm:flex-row sm:justify-between gap-1 pb-3 border-b border-sand/60 dark:border-nightBorder/80">
                             <dt class="text-inkMuted dark:text-nightMuted">Peran Saat Ini</dt>
                             <dd class="font-medium text-ink dark:text-nightInk sm:text-right">Operational Staff, PT Mumtaz Catering</dd>
                         </div>
-                        <div class="flex flex-col sm:flex-row sm:justify-between gap-1 pb-3 border-b border-zinc-100 dark:border-zinc-800/80">
+                        <div class="flex flex-col sm:flex-row sm:justify-between gap-1 pb-3 border-b border-sand/60 dark:border-nightBorder/80">
                             <dt class="text-inkMuted dark:text-nightMuted">Pendidikan</dt>
                             <dd class="font-medium text-ink dark:text-nightInk sm:text-right">S1 Teknik Informatika, UNPAM</dd>
                         </div>
-                        <div class="flex flex-col sm:flex-row sm:justify-between gap-1 pb-3 border-b border-zinc-100 dark:border-zinc-800/80">
+                        <div class="flex flex-col sm:flex-row sm:justify-between gap-1 pb-3 border-b border-sand/60 dark:border-nightBorder/80">
                             <dt class="text-inkMuted dark:text-nightMuted">Alat Utama</dt>
                             <dd class="font-mono text-xs sm:text-sm text-ink dark:text-nightInk sm:text-right">Python, Excel, SQL</dd>
                         </div>
                         <div class="flex flex-col sm:flex-row sm:justify-between gap-1">
                             <dt class="text-inkMuted dark:text-nightMuted">Ketersediaan</dt>
-                            <dd class="font-medium text-pine dark:text-tealBright sm:text-right">Full-time, Freelance, &amp; Magang</dd>
+                            <dd class="font-medium text-terracotta dark:text-copper sm:text-right">Full-time, Freelance, &amp; Magang</dd>
                         </div>
                     </dl>
                 </aside>
@@ -415,7 +418,7 @@
         </section>
 
         <!-- ================= TENTANG & PENDIDIKAN ================= -->
-        <section id="tentang" class="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto border-b border-zinc-200 dark:border-zinc-800">
+        <section id="tentang" class="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto border-b border-sand dark:border-nightBorder">
             <div class="reveal-item grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
                 <div class="lg:col-span-7 space-y-5">
                     <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-ink dark:text-nightInk">
@@ -431,11 +434,11 @@
                     <div class="pt-4">
                         <h3 class="text-sm font-semibold text-ink dark:text-nightInk mb-3">Pelatihan &amp; Sertifikasi</h3>
                         <ul class="space-y-2.5 text-sm">
-                            <li class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 py-2.5 px-4 rounded-md bg-paperAlt dark:bg-nightAlt border border-zinc-200 dark:border-zinc-800">
+                            <li class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 py-2.5 px-4 rounded-md bg-paperAlt dark:bg-nightAlt border border-sand dark:border-nightBorder">
                                 <span class="font-medium text-ink dark:text-nightInk">Fullstack Data Analyst Training</span>
                                 <span class="font-mono text-xs text-inkMuted dark:text-nightMuted">Rocket Tutor</span>
                             </li>
-                            <li class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 py-2.5 px-4 rounded-md bg-paperAlt dark:bg-nightAlt border border-zinc-200 dark:border-zinc-800">
+                            <li class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 py-2.5 px-4 rounded-md bg-paperAlt dark:bg-nightAlt border border-sand dark:border-nightBorder">
                                 <span class="font-medium text-ink dark:text-nightInk">The Freelance Starter Program</span>
                                 <span class="font-mono text-xs text-inkMuted dark:text-nightMuted">Professional Readiness</span>
                             </li>
@@ -447,9 +450,9 @@
                     <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-ink dark:text-nightInk mb-5">
                         Pendidikan
                     </h2>
-                    <div class="space-y-6 border-l-2 border-zinc-200 dark:border-zinc-800 pl-5">
+                    <div class="space-y-6 border-l-2 border-sand dark:border-nightBorder pl-5">
                         <div>
-                            <p class="font-mono text-xs text-pine dark:text-tealBright mb-1">Saat Ini (Kelas 04TPLE005)</p>
+                            <p class="font-mono text-xs text-terracotta dark:text-copper mb-1">Saat Ini (Kelas 04TPLE005)</p>
                             <h3 class="text-base font-semibold text-ink dark:text-nightInk">Universitas Pamulang (UNPAM)</h3>
                             <p class="text-sm text-inkMuted dark:text-nightMuted mt-0.5">S1 Teknik Informatika</p>
                         </div>
@@ -464,7 +467,7 @@
         </section>
 
         <!-- ================= PENGALAMAN ================= -->
-        <section id="pengalaman" class="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto border-b border-zinc-200 dark:border-zinc-800">
+        <section id="pengalaman" class="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto border-b border-sand dark:border-nightBorder">
             <div class="reveal-item">
             <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-ink dark:text-nightInk mb-8">
                 Pengalaman Kerja &amp; Organisasi
@@ -474,7 +477,7 @@
                 <!-- Pengalaman 1 -->
                 <article class="py-6 first:pt-0 grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8">
                     <div class="md:col-span-4 space-y-1">
-                        <p class="font-mono text-xs text-pine dark:text-tealBright">Juli 2024 - Sekarang</p>
+                        <p class="font-mono text-xs text-terracotta dark:text-copper">Juli 2024 - Sekarang</p>
                         <h3 class="text-lg font-semibold text-ink dark:text-nightInk">Operational Staff</h3>
                         <p class="text-sm font-medium text-inkMuted dark:text-nightMuted">PT Mumtaz Catering</p>
                     </div>
@@ -509,7 +512,7 @@
         </section>
 
         <!-- ================= PROYEK & STUDI KASUS ================= -->
-        <section id="proyek" class="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto border-b border-zinc-200 dark:border-zinc-800">
+        <section id="proyek" class="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto border-b border-sand dark:border-nightBorder">
             <div class="reveal-item flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
                 <div>
                     <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-ink dark:text-nightInk">
@@ -521,22 +524,22 @@
                 </div>
 
                 <div class="flex flex-wrap gap-2" role="group" aria-label="Filter kategori proyek" id="project-filters">
-                    <button type="button" class="filter-btn min-h-[44px] px-4 py-2 rounded-md text-xs sm:text-sm font-semibold bg-pine dark:bg-tealBright text-white dark:text-night transition-colors" data-filter="all" aria-pressed="true">
+                    <button type="button" class="filter-btn min-h-[44px] px-4 py-2 rounded-md text-xs sm:text-sm font-semibold bg-terracotta dark:bg-copper text-ivory dark:text-night transition-colors" data-filter="all" aria-pressed="true">
                         Semua (6)
                     </button>
-                    <button type="button" class="filter-btn min-h-[44px] px-4 py-2 rounded-md text-xs sm:text-sm font-medium border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-nightAlt text-ink dark:text-nightInk hover:border-pine dark:hover:border-tealBright transition-colors" data-filter="python-dm" aria-pressed="false">
+                    <button type="button" class="filter-btn min-h-[44px] px-4 py-2 rounded-md text-xs sm:text-sm font-medium border border-sand dark:border-nightBorder bg-ivory dark:bg-nightAlt text-ink dark:text-nightInk hover:border-terracotta dark:hover:border-copper transition-colors" data-filter="python-dm" aria-pressed="false">
                         Python &amp; Data Mining
                     </button>
-                    <button type="button" class="filter-btn min-h-[44px] px-4 py-2 rounded-md text-xs sm:text-sm font-medium border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-nightAlt text-ink dark:text-nightInk hover:border-pine dark:hover:border-tealBright transition-colors" data-filter="excel-ba" aria-pressed="false">
+                    <button type="button" class="filter-btn min-h-[44px] px-4 py-2 rounded-md text-xs sm:text-sm font-medium border border-sand dark:border-nightBorder bg-ivory dark:bg-nightAlt text-ink dark:text-nightInk hover:border-terracotta dark:hover:border-copper transition-colors" data-filter="excel-ba" aria-pressed="false">
                         Excel &amp; Analytics
                     </button>
-                    <button type="button" class="filter-btn min-h-[44px] px-4 py-2 rounded-md text-xs sm:text-sm font-medium border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-nightAlt text-ink dark:text-nightInk hover:border-pine dark:hover:border-tealBright transition-colors" data-filter="automation" aria-pressed="false">
+                    <button type="button" class="filter-btn min-h-[44px] px-4 py-2 rounded-md text-xs sm:text-sm font-medium border border-sand dark:border-nightBorder bg-ivory dark:bg-nightAlt text-ink dark:text-nightInk hover:border-terracotta dark:hover:border-copper transition-colors" data-filter="automation" aria-pressed="false">
                         Automation
                     </button>
                 </div>
             </div>
 
-            <div id="projects-empty" class="hidden py-10 px-6 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-paperAlt dark:bg-nightAlt text-center text-sm text-inkMuted dark:text-nightMuted">
+            <div id="projects-empty" class="hidden py-10 px-6 rounded-lg border border-sand dark:border-nightBorder bg-paperAlt dark:bg-nightAlt text-center text-sm text-inkMuted dark:text-nightMuted">
                 Tidak ada proyek yang cocok dengan kategori ini.
             </div>
 
@@ -544,11 +547,11 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="projects-grid">
 
                 <!-- Proyek 1 (Featured) -->
-                <article class="project-card md:col-span-2 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-nightAlt p-6 flex flex-col justify-between gap-5 hover:border-pine dark:hover:border-tealBright transition-colors" data-category="python-dm">
+                <article class="project-card md:col-span-2 rounded-lg border border-sand dark:border-nightBorder bg-ivory dark:bg-nightAlt p-6 flex flex-col justify-between gap-5 hover:border-terracotta dark:hover:border-copper transition-colors" data-category="python-dm">
                     <div class="space-y-3">
                         <div class="flex flex-wrap items-center justify-between gap-2">
-                            <span class="font-mono text-xs text-pine dark:text-tealBright">Studi Kasus Utama / Jupyter Notebook</span>
-                            <span class="font-mono text-xs px-2.5 py-1 rounded bg-paperAlt dark:bg-night text-inkMuted dark:text-nightMuted border border-zinc-200 dark:border-zinc-800">
+                            <span class="font-mono text-xs text-terracotta dark:text-copper">Studi Kasus Utama / Jupyter Notebook</span>
+                            <span class="font-mono text-xs px-2.5 py-1 rounded bg-paperAlt dark:bg-night text-inkMuted dark:text-nightMuted border border-sand dark:border-nightBorder">
                                 file csv shafwan.csv
                             </span>
                         </div>
@@ -560,17 +563,17 @@
                         </p>
                     </div>
 
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-zinc-100 dark:border-zinc-800">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-sand/60 dark:border-nightBorder">
                         <div class="flex flex-wrap gap-2 font-mono text-xs text-inkMuted dark:text-nightMuted">
                             <span class="px-2.5 py-1 rounded bg-paperAlt dark:bg-night">Python</span>
                             <span class="px-2.5 py-1 rounded bg-paperAlt dark:bg-night">Pandas</span>
                             <span class="px-2.5 py-1 rounded bg-paperAlt dark:bg-night">Matplotlib &amp; Seaborn</span>
                         </div>
                         <div class="flex items-center gap-2.5">
-                            <button type="button" onclick="openStudyCaseModal(0, this)" class="min-h-[44px] px-4 py-2 rounded-md bg-pine dark:bg-tealBright text-white dark:text-night text-sm font-semibold hover:opacity-90 transition-opacity">
+                            <button type="button" onclick="openStudyCaseModal(0, this)" class="min-h-[44px] px-4 py-2 rounded-md bg-terracotta dark:bg-copper text-ivory dark:text-night text-sm font-semibold hover:opacity-90 transition-opacity">
                                 Baca Detail Studi Kasus
                             </button>
-                            <a href="https://github.com/shafwanmumtaz/residential-property-eda" target="_blank" rel="noopener noreferrer" class="min-h-[44px] px-4 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 text-ink dark:text-nightInk hover:border-pine dark:hover:border-tealBright text-sm font-medium flex items-center justify-center transition-colors">
+                            <a href="https://github.com/shafwanmumtaz/residential-property-eda" target="_blank" rel="noopener noreferrer" class="min-h-[44px] px-4 py-2 rounded-md border border-sand dark:border-nightBorder text-ink dark:text-nightInk hover:border-terracotta dark:hover:border-copper text-sm font-medium flex items-center justify-center transition-colors">
                                 Repo GitHub
                             </a>
                         </div>
@@ -578,7 +581,7 @@
                 </article>
 
                 <!-- Proyek 2 -->
-                <article class="project-card rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-nightAlt p-6 flex flex-col justify-between gap-5 hover:border-pine dark:hover:border-tealBright transition-colors" data-category="python-dm">
+                <article class="project-card rounded-lg border border-sand dark:border-nightBorder bg-ivory dark:bg-nightAlt p-6 flex flex-col justify-between gap-5 hover:border-terracotta dark:hover:border-copper transition-colors" data-category="python-dm">
                     <div class="space-y-2.5">
                         <div class="flex items-center justify-between gap-2 font-mono text-xs text-inkMuted dark:text-nightMuted">
                             <span>Python &amp; Data Mining</span>
@@ -598,10 +601,10 @@
                             <span class="px-2 py-0.5 rounded bg-paperAlt dark:bg-night">EDA</span>
                         </div>
                         <div class="flex gap-2">
-                            <button type="button" onclick="openStudyCaseModal(1, this)" class="flex-1 min-h-[44px] px-3 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 hover:border-pine dark:hover:border-tealBright text-ink dark:text-nightInk text-sm font-semibold transition-colors">
+                            <button type="button" onclick="openStudyCaseModal(1, this)" class="flex-1 min-h-[44px] px-3 py-2 rounded-md border border-sand dark:border-nightBorder hover:border-terracotta dark:hover:border-copper text-ink dark:text-nightInk text-sm font-semibold transition-colors">
                                 Baca Detail
                             </button>
-                            <a href="https://github.com/shafwanmumtaz/netflix-shows-eda" target="_blank" rel="noopener noreferrer" aria-label="Buka repositori Netflix Shows EDA di GitHub" class="min-h-[44px] px-4 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 hover:border-pine dark:hover:border-tealBright text-inkMuted dark:text-nightMuted hover:text-ink dark:hover:text-nightInk text-sm font-medium flex items-center justify-center transition-colors">
+                            <a href="https://github.com/shafwanmumtaz/netflix-shows-eda" target="_blank" rel="noopener noreferrer" aria-label="Buka repositori Netflix Shows EDA di GitHub" class="min-h-[44px] px-4 py-2 rounded-md border border-sand dark:border-nightBorder hover:border-terracotta dark:hover:border-copper text-inkMuted dark:text-nightMuted hover:text-ink dark:hover:text-nightInk text-sm font-medium flex items-center justify-center transition-colors">
                                 GitHub
                             </a>
                         </div>
@@ -609,7 +612,7 @@
                 </article>
 
                 <!-- Proyek 3 -->
-                <article class="project-card rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-nightAlt p-6 flex flex-col justify-between gap-5 hover:border-pine dark:hover:border-tealBright transition-colors" data-category="excel-ba">
+                <article class="project-card rounded-lg border border-sand dark:border-nightBorder bg-ivory dark:bg-nightAlt p-6 flex flex-col justify-between gap-5 hover:border-terracotta dark:hover:border-copper transition-colors" data-category="excel-ba">
                     <div class="space-y-2.5">
                         <div class="flex items-center justify-between gap-2 font-mono text-xs text-inkMuted dark:text-nightMuted">
                             <span>Excel &amp; Analytics</span>
@@ -628,10 +631,10 @@
                             <span class="px-2 py-0.5 rounded bg-paperAlt dark:bg-night">Microsoft Excel</span>
                         </div>
                         <div class="flex gap-2">
-                            <button type="button" onclick="openStudyCaseModal(2, this)" class="flex-1 min-h-[44px] px-3 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 hover:border-pine dark:hover:border-tealBright text-ink dark:text-nightInk text-sm font-semibold transition-colors">
+                            <button type="button" onclick="openStudyCaseModal(2, this)" class="flex-1 min-h-[44px] px-3 py-2 rounded-md border border-sand dark:border-nightBorder hover:border-terracotta dark:hover:border-copper text-ink dark:text-nightInk text-sm font-semibold transition-colors">
                                 Baca Detail
                             </button>
-                            <a href="https://github.com/shafwanmumtaz/sales-pivot-analytics" target="_blank" rel="noopener noreferrer" aria-label="Buka repositori Corporate Sales Pivot di GitHub" class="min-h-[44px] px-4 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 hover:border-pine dark:hover:border-tealBright text-inkMuted dark:text-nightMuted hover:text-ink dark:hover:text-nightInk text-sm font-medium flex items-center justify-center transition-colors">
+                            <a href="https://github.com/shafwanmumtaz/sales-pivot-analytics" target="_blank" rel="noopener noreferrer" aria-label="Buka repositori Corporate Sales Pivot di GitHub" class="min-h-[44px] px-4 py-2 rounded-md border border-sand dark:border-nightBorder hover:border-terracotta dark:hover:border-copper text-inkMuted dark:text-nightMuted hover:text-ink dark:hover:text-nightInk text-sm font-medium flex items-center justify-center transition-colors">
                                 GitHub
                             </a>
                         </div>
@@ -639,7 +642,7 @@
                 </article>
 
                 <!-- Proyek 4 -->
-                <article class="project-card rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-nightAlt p-6 flex flex-col justify-between gap-5 hover:border-pine dark:hover:border-tealBright transition-colors" data-category="excel-ba">
+                <article class="project-card rounded-lg border border-sand dark:border-nightBorder bg-ivory dark:bg-nightAlt p-6 flex flex-col justify-between gap-5 hover:border-terracotta dark:hover:border-copper transition-colors" data-category="excel-ba">
                     <div class="space-y-2.5">
                         <div class="flex items-center justify-between gap-2 font-mono text-xs text-inkMuted dark:text-nightMuted">
                             <span>Excel &amp; Analytics</span>
@@ -659,10 +662,10 @@
                             <span class="px-2 py-0.5 rounded bg-paperAlt dark:bg-night">COUNTIF</span>
                         </div>
                         <div class="flex gap-2">
-                            <button type="button" onclick="openStudyCaseModal(3, this)" class="flex-1 min-h-[44px] px-3 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 hover:border-pine dark:hover:border-tealBright text-ink dark:text-nightInk text-sm font-semibold transition-colors">
+                            <button type="button" onclick="openStudyCaseModal(3, this)" class="flex-1 min-h-[44px] px-3 py-2 rounded-md border border-sand dark:border-nightBorder hover:border-terracotta dark:hover:border-copper text-ink dark:text-nightInk text-sm font-semibold transition-colors">
                                 Baca Detail
                             </button>
-                            <a href="https://github.com/shafwanmumtaz/excel-data-cleaning" target="_blank" rel="noopener noreferrer" aria-label="Buka repositori Excel Data Cleaning di GitHub" class="min-h-[44px] px-4 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 hover:border-pine dark:hover:border-tealBright text-inkMuted dark:text-nightMuted hover:text-ink dark:hover:text-nightInk text-sm font-medium flex items-center justify-center transition-colors">
+                            <a href="https://github.com/shafwanmumtaz/excel-data-cleaning" target="_blank" rel="noopener noreferrer" aria-label="Buka repositori Excel Data Cleaning di GitHub" class="min-h-[44px] px-4 py-2 rounded-md border border-sand dark:border-nightBorder hover:border-terracotta dark:hover:border-copper text-inkMuted dark:text-nightMuted hover:text-ink dark:hover:text-nightInk text-sm font-medium flex items-center justify-center transition-colors">
                                 GitHub
                             </a>
                         </div>
@@ -670,7 +673,7 @@
                 </article>
 
                 <!-- Proyek 5 -->
-                <article class="project-card rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-nightAlt p-6 flex flex-col justify-between gap-5 hover:border-pine dark:hover:border-tealBright transition-colors" data-category="automation">
+                <article class="project-card rounded-lg border border-sand dark:border-nightBorder bg-ivory dark:bg-nightAlt p-6 flex flex-col justify-between gap-5 hover:border-terracotta dark:hover:border-copper transition-colors" data-category="automation">
                     <div class="space-y-2.5">
                         <div class="flex items-center justify-between gap-2 font-mono text-xs text-inkMuted dark:text-nightMuted">
                             <span>Automation</span>
@@ -690,10 +693,10 @@
                             <span class="px-2 py-0.5 rounded bg-paperAlt dark:bg-night">CLI Tool</span>
                         </div>
                         <div class="flex gap-2">
-                            <button type="button" onclick="openStudyCaseModal(4, this)" class="flex-1 min-h-[44px] px-3 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 hover:border-pine dark:hover:border-tealBright text-ink dark:text-nightInk text-sm font-semibold transition-colors">
+                            <button type="button" onclick="openStudyCaseModal(4, this)" class="flex-1 min-h-[44px] px-3 py-2 rounded-md border border-sand dark:border-nightBorder hover:border-terracotta dark:hover:border-copper text-ink dark:text-nightInk text-sm font-semibold transition-colors">
                                 Baca Detail
                             </button>
-                            <a href="https://github.com/shafwanmumtaz/python-automation-scripts" target="_blank" rel="noopener noreferrer" aria-label="Buka repositori Python Automation Scripts di GitHub" class="min-h-[44px] px-4 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 hover:border-pine dark:hover:border-tealBright text-inkMuted dark:text-nightMuted hover:text-ink dark:hover:text-nightInk text-sm font-medium flex items-center justify-center transition-colors">
+                            <a href="https://github.com/shafwanmumtaz/python-automation-scripts" target="_blank" rel="noopener noreferrer" aria-label="Buka repositori Python Automation Scripts di GitHub" class="min-h-[44px] px-4 py-2 rounded-md border border-sand dark:border-nightBorder hover:border-terracotta dark:hover:border-copper text-inkMuted dark:text-nightMuted hover:text-ink dark:hover:text-nightInk text-sm font-medium flex items-center justify-center transition-colors">
                                 GitHub
                             </a>
                         </div>
@@ -701,7 +704,7 @@
                 </article>
 
                 <!-- Proyek 6 -->
-                <article class="project-card md:col-span-2 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-nightAlt p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-5 hover:border-pine dark:hover:border-tealBright transition-colors" data-category="excel-ba">
+                <article class="project-card md:col-span-2 rounded-lg border border-sand dark:border-nightBorder bg-ivory dark:bg-nightAlt p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-5 hover:border-terracotta dark:hover:border-copper transition-colors" data-category="excel-ba">
                     <div class="space-y-2 max-w-2xl">
                         <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-inkMuted dark:text-nightMuted">
                             <span>Excel &amp; Analytics</span>
@@ -715,10 +718,10 @@
                         </p>
                     </div>
                     <div class="flex items-center gap-2 shrink-0">
-                        <button type="button" onclick="openStudyCaseModal(5, this)" class="min-h-[44px] px-4 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 hover:border-pine dark:hover:border-tealBright text-ink dark:text-nightInk text-sm font-semibold transition-colors">
+                        <button type="button" onclick="openStudyCaseModal(5, this)" class="min-h-[44px] px-4 py-2 rounded-md border border-sand dark:border-nightBorder hover:border-terracotta dark:hover:border-copper text-ink dark:text-nightInk text-sm font-semibold transition-colors">
                             Baca Detail
                         </button>
-                        <a href="https://github.com/shafwanmumtaz/catering-operations-report" target="_blank" rel="noopener noreferrer" aria-label="Buka repositori Catering Operations Report di GitHub" class="min-h-[44px] px-4 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 hover:border-pine dark:hover:border-tealBright text-inkMuted dark:text-nightMuted hover:text-ink dark:hover:text-nightInk text-sm font-medium flex items-center justify-center transition-colors">
+                        <a href="https://github.com/shafwanmumtaz/catering-operations-report" target="_blank" rel="noopener noreferrer" aria-label="Buka repositori Catering Operations Report di GitHub" class="min-h-[44px] px-4 py-2 rounded-md border border-sand dark:border-nightBorder hover:border-terracotta dark:hover:border-copper text-inkMuted dark:text-nightMuted hover:text-ink dark:hover:text-nightInk text-sm font-medium flex items-center justify-center transition-colors">
                             GitHub
                         </a>
                     </div>
@@ -728,7 +731,7 @@
         </section>
 
         <!-- ================= KEAHLIAN (TANPA PERSENTASE BUATAN) ================= -->
-        <section id="keahlian" class="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto border-b border-zinc-200 dark:border-zinc-800">
+        <section id="keahlian" class="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto border-b border-sand dark:border-nightBorder">
             <div class="reveal-item">
             <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-ink dark:text-nightInk mb-3">
                 Keahlian &amp; Alat Kerja
@@ -739,7 +742,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="space-y-3">
-                    <h3 class="font-mono text-xs uppercase tracking-wider text-pine dark:text-tealBright pb-2 border-b border-zinc-200 dark:border-zinc-800">
+                    <h3 class="font-mono text-xs uppercase tracking-wider text-terracotta dark:text-copper pb-2 border-b border-sand dark:border-nightBorder">
                         Python &amp; Data Mining
                     </h3>
                     <ul class="space-y-2.5 text-sm text-inkMuted dark:text-nightMuted">
@@ -750,7 +753,7 @@
                 </div>
 
                 <div class="space-y-3">
-                    <h3 class="font-mono text-xs uppercase tracking-wider text-pine dark:text-tealBright pb-2 border-b border-zinc-200 dark:border-zinc-800">
+                    <h3 class="font-mono text-xs uppercase tracking-wider text-terracotta dark:text-copper pb-2 border-b border-sand dark:border-nightBorder">
                         Excel &amp; SQL
                     </h3>
                     <ul class="space-y-2.5 text-sm text-inkMuted dark:text-nightMuted">
@@ -761,7 +764,7 @@
                 </div>
 
                 <div class="space-y-3">
-                    <h3 class="font-mono text-xs uppercase tracking-wider text-pine dark:text-tealBright pb-2 border-b border-zinc-200 dark:border-zinc-800">
+                    <h3 class="font-mono text-xs uppercase tracking-wider text-terracotta dark:text-copper pb-2 border-b border-sand dark:border-nightBorder">
                         Operasional &amp; Kolaborasi
                     </h3>
                     <ul class="space-y-2.5 text-sm text-inkMuted dark:text-nightMuted">
@@ -787,74 +790,74 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <!-- Email -->
-                <div class="p-5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-nightAlt flex flex-col justify-between gap-4 min-w-0">
+                <div class="p-5 rounded-lg border border-sand dark:border-nightBorder bg-ivory dark:bg-nightAlt flex flex-col justify-between gap-4 min-w-0">
                     <div class="min-w-0">
                         <span class="font-mono text-xs text-inkMuted dark:text-nightMuted block mb-1">Email</span>
-                        <a href="mailto:shafwanmumtaz0@gmail.com" class="text-base font-semibold text-ink dark:text-nightInk hover:text-pine dark:hover:text-tealBright break-all [overflow-wrap:anywhere]">
+                        <a href="mailto:shafwanmumtaz0@gmail.com" class="text-base font-semibold text-ink dark:text-nightInk hover:text-terracotta dark:hover:text-copper break-all [overflow-wrap:anywhere]">
                             shafwanmumtaz0@gmail.com
                         </a>
                     </div>
-                    <div class="flex flex-wrap gap-2 pt-3 border-t border-zinc-100 dark:border-zinc-800">
-                        <button type="button" onclick="copyText('shafwanmumtaz0@gmail.com', 'Email')" class="min-h-[44px] flex-1 px-3 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 hover:border-pine dark:hover:border-tealBright text-xs font-semibold text-ink dark:text-nightInk transition-colors">
+                    <div class="flex flex-wrap gap-2 pt-3 border-t border-sand/60 dark:border-nightBorder">
+                        <button type="button" onclick="copyText('shafwanmumtaz0@gmail.com', 'Email')" class="min-h-[44px] flex-1 px-3 py-2 rounded-md border border-sand dark:border-nightBorder hover:border-terracotta dark:hover:border-copper text-xs font-semibold text-ink dark:text-nightInk transition-colors">
                             Salin Email
                         </button>
-                        <a href="mailto:shafwanmumtaz0@gmail.com" class="min-h-[44px] flex-1 px-3 py-2 rounded-md bg-pine dark:bg-tealBright text-white dark:text-night text-xs font-semibold flex items-center justify-center hover:opacity-90 transition-opacity">
+                        <a href="mailto:shafwanmumtaz0@gmail.com" class="min-h-[44px] flex-1 px-3 py-2 rounded-md bg-terracotta dark:bg-copper text-ivory dark:text-night text-xs font-semibold flex items-center justify-center hover:opacity-90 transition-opacity">
                             Kirim Email
                         </a>
                     </div>
                 </div>
 
                 <!-- GitHub -->
-                <div class="p-5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-nightAlt flex flex-col justify-between gap-4 min-w-0">
+                <div class="p-5 rounded-lg border border-sand dark:border-nightBorder bg-ivory dark:bg-nightAlt flex flex-col justify-between gap-4 min-w-0">
                     <div class="min-w-0">
                         <span class="font-mono text-xs text-inkMuted dark:text-nightMuted block mb-1">GitHub</span>
-                        <a href="https://github.com/shafwanmumtaz" target="_blank" rel="noopener noreferrer" class="text-base font-semibold text-ink dark:text-nightInk hover:text-pine dark:hover:text-tealBright break-all [overflow-wrap:anywhere]">
+                        <a href="https://github.com/shafwanmumtaz" target="_blank" rel="noopener noreferrer" class="text-base font-semibold text-ink dark:text-nightInk hover:text-terracotta dark:hover:text-copper break-all [overflow-wrap:anywhere]">
                             github.com/shafwanmumtaz
                         </a>
                     </div>
-                    <div class="flex flex-wrap gap-2 pt-3 border-t border-zinc-100 dark:border-zinc-800">
-                        <button type="button" onclick="copyText('https://github.com/shafwanmumtaz', 'URL GitHub')" class="min-h-[44px] flex-1 px-3 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 hover:border-pine dark:hover:border-tealBright text-xs font-semibold text-ink dark:text-nightInk transition-colors">
+                    <div class="flex flex-wrap gap-2 pt-3 border-t border-sand/60 dark:border-nightBorder">
+                        <button type="button" onclick="copyText('https://github.com/shafwanmumtaz', 'URL GitHub')" class="min-h-[44px] flex-1 px-3 py-2 rounded-md border border-sand dark:border-nightBorder hover:border-terracotta dark:hover:border-copper text-xs font-semibold text-ink dark:text-nightInk transition-colors">
                             Salin URL
                         </button>
-                        <a href="https://github.com/shafwanmumtaz" target="_blank" rel="noopener noreferrer" class="min-h-[44px] flex-1 px-3 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 hover:border-pine dark:hover:border-tealBright text-xs font-semibold text-ink dark:text-nightInk flex items-center justify-center transition-colors">
+                        <a href="https://github.com/shafwanmumtaz" target="_blank" rel="noopener noreferrer" class="min-h-[44px] flex-1 px-3 py-2 rounded-md border border-sand dark:border-nightBorder hover:border-terracotta dark:hover:border-copper text-xs font-semibold text-ink dark:text-nightInk flex items-center justify-center transition-colors">
                             Buka Profil
                         </a>
                     </div>
                 </div>
 
                 <!-- LinkedIn -->
-                <div class="p-5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-nightAlt flex flex-col justify-between gap-4 min-w-0">
+                <div class="p-5 rounded-lg border border-sand dark:border-nightBorder bg-ivory dark:bg-nightAlt flex flex-col justify-between gap-4 min-w-0">
                     <div class="min-w-0">
                         <span class="font-mono text-xs text-inkMuted dark:text-nightMuted block mb-1">LinkedIn</span>
-                        <a href="https://www.linkedin.com/in/shafwan-mumtaz-433927370/" target="_blank" rel="noopener noreferrer" class="text-base font-semibold text-ink dark:text-nightInk hover:text-pine dark:hover:text-tealBright break-all [overflow-wrap:anywhere]">
+                        <a href="https://www.linkedin.com/in/shafwan-mumtaz-433927370/" target="_blank" rel="noopener noreferrer" class="text-base font-semibold text-ink dark:text-nightInk hover:text-terracotta dark:hover:text-copper break-all [overflow-wrap:anywhere]">
                             linkedin.com/in/shafwan-mumtaz-433927370
                         </a>
                     </div>
-                    <div class="flex flex-wrap gap-2 pt-3 border-t border-zinc-100 dark:border-zinc-800">
-                        <button type="button" onclick="copyText('https://www.linkedin.com/in/shafwan-mumtaz-433927370/', 'URL LinkedIn')" class="min-h-[44px] flex-1 px-3 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 hover:border-pine dark:hover:border-tealBright text-xs font-semibold text-ink dark:text-nightInk transition-colors">
+                    <div class="flex flex-wrap gap-2 pt-3 border-t border-sand/60 dark:border-nightBorder">
+                        <button type="button" onclick="copyText('https://www.linkedin.com/in/shafwan-mumtaz-433927370/', 'URL LinkedIn')" class="min-h-[44px] flex-1 px-3 py-2 rounded-md border border-sand dark:border-nightBorder hover:border-terracotta dark:hover:border-copper text-xs font-semibold text-ink dark:text-nightInk transition-colors">
                             Salin URL
                         </button>
-                        <a href="https://www.linkedin.com/in/shafwan-mumtaz-433927370/" target="_blank" rel="noopener noreferrer" class="min-h-[44px] flex-1 px-3 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 hover:border-pine dark:hover:border-tealBright text-xs font-semibold text-ink dark:text-nightInk flex items-center justify-center transition-colors">
+                        <a href="https://www.linkedin.com/in/shafwan-mumtaz-433927370/" target="_blank" rel="noopener noreferrer" class="min-h-[44px] flex-1 px-3 py-2 rounded-md border border-sand dark:border-nightBorder hover:border-terracotta dark:hover:border-copper text-xs font-semibold text-ink dark:text-nightInk flex items-center justify-center transition-colors">
                             Buka Profil
                         </a>
                     </div>
                 </div>
 
                 <!-- Telepon / WhatsApp -->
-                <div class="p-5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-nightAlt flex items-center justify-between gap-4 min-w-0">
+                <div class="p-5 rounded-lg border border-sand dark:border-nightBorder bg-ivory dark:bg-nightAlt flex items-center justify-between gap-4 min-w-0">
                     <div class="min-w-0">
                         <span class="font-mono text-xs text-inkMuted dark:text-nightMuted block mb-1">Telepon / WhatsApp</span>
-                        <a href="tel:+6287844061327" class="text-base font-semibold text-ink dark:text-nightInk hover:text-pine dark:hover:text-tealBright">
+                        <a href="tel:+6287844061327" class="text-base font-semibold text-ink dark:text-nightInk hover:text-terracotta dark:hover:text-copper">
                             0878-4406-1327
                         </a>
                     </div>
-                    <button type="button" onclick="copyText('087844061327', 'Nomor Telepon')" class="min-h-[44px] px-4 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 hover:border-pine dark:hover:border-tealBright text-xs font-semibold text-ink dark:text-nightInk shrink-0 transition-colors">
+                    <button type="button" onclick="copyText('087844061327', 'Nomor Telepon')" class="min-h-[44px] px-4 py-2 rounded-md border border-sand dark:border-nightBorder hover:border-terracotta dark:hover:border-copper text-xs font-semibold text-ink dark:text-nightInk shrink-0 transition-colors">
                         Salin
                     </button>
                 </div>
 
                 <!-- Domisili -->
-                <div class="md:col-span-2 p-5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-nightAlt flex items-center min-w-0">
+                <div class="md:col-span-2 p-5 rounded-lg border border-sand dark:border-nightBorder bg-ivory dark:bg-nightAlt flex items-center min-w-0">
                     <div>
                         <span class="font-mono text-xs text-inkMuted dark:text-nightMuted block mb-1">Domisili</span>
                         <p class="text-base font-semibold text-ink dark:text-nightInk">
@@ -864,12 +867,12 @@
                 </div>
             </div>
 
-            <div id="copy-toast" role="status" aria-live="polite" class="mt-4 text-sm font-mono text-pine dark:text-tealBright min-h-[1.5rem]"></div>
+            <div id="copy-toast" role="status" aria-live="polite" class="mt-4 text-sm font-mono text-terracotta dark:text-copper min-h-[1.5rem]"></div>
         </section>
     </main>
 
     <!-- ================= FOOTER ================= -->
-    <footer class="border-t border-zinc-200 dark:border-zinc-800 py-8 text-sm text-inkMuted dark:text-nightMuted">
+    <footer class="border-t border-sand dark:border-nightBorder py-8 text-sm text-inkMuted dark:text-nightMuted">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-3">
             <p>&copy; <span id="current-year"></span> Shafwan Mumtaz, Tangerang.</p>
             <p class="font-mono text-xs">Teknik Informatika, Universitas Pamulang</p>
@@ -878,32 +881,32 @@
 
     <!-- ================= MODAL DETAIL STUDI KASUS ================= -->
     <div id="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-zinc-950/75">
-        <div id="project-modal-panel" class="rounded-lg max-w-2xl w-full p-6 sm:p-8 relative bg-white dark:bg-nightAlt border border-zinc-200 dark:border-zinc-700 max-h-[90vh] overflow-y-auto">
-            <button type="button" id="modal-close-btn" onclick="closeProjectModal()" aria-label="Tutup detail studi kasus" class="min-h-[44px] min-w-[44px] absolute top-4 right-4 rounded-md border border-zinc-300 dark:border-zinc-700 text-ink dark:text-nightInk hover:border-pine dark:hover:border-tealBright flex items-center justify-center transition-colors">
+        <div id="project-modal-panel" class="rounded-lg max-w-2xl w-full p-6 sm:p-8 relative bg-ivory dark:bg-nightAlt border border-sand dark:border-nightBorder max-h-[90vh] overflow-y-auto">
+            <button type="button" id="modal-close-btn" onclick="closeProjectModal()" aria-label="Tutup detail studi kasus" class="min-h-[44px] min-w-[44px] absolute top-4 right-4 rounded-md border border-sand dark:border-nightBorder text-ink dark:text-nightInk hover:border-terracotta dark:hover:border-copper flex items-center justify-center transition-colors">
                 <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                     <path d="M18 6L6 18M6 6l12 12"></path>
                 </svg>
             </button>
 
             <div class="flex flex-wrap items-center gap-2 pr-12 mb-2">
-                <span id="modal-badge" class="font-mono text-xs px-2.5 py-0.5 rounded bg-paperAlt dark:bg-night text-pine dark:text-tealBright border border-zinc-200 dark:border-zinc-700">Kategori</span>
+                <span id="modal-badge" class="font-mono text-xs px-2.5 py-0.5 rounded bg-paperAlt dark:bg-night text-terracotta dark:text-copper border border-sand dark:border-nightBorder">Kategori</span>
                 <span id="modal-file" class="font-mono text-xs text-inkMuted dark:text-nightMuted">file.ext</span>
             </div>
 
             <h3 id="modal-title" class="font-serif text-xl sm:text-2xl font-semibold text-ink dark:text-nightInk mb-5 pr-8">Judul Studi Kasus</h3>
 
             <div class="space-y-4 text-sm">
-                <div class="p-4 rounded-md bg-paperAlt dark:bg-night border border-zinc-200 dark:border-zinc-800">
+                <div class="p-4 rounded-md bg-paperAlt dark:bg-night border border-sand dark:border-nightBorder">
                     <h4 class="font-mono text-xs uppercase tracking-wider text-ink dark:text-nightInk mb-1.5">1. Tantangan &amp; Masalah Data</h4>
                     <p id="modal-challenge" class="text-inkMuted dark:text-nightMuted leading-relaxed"></p>
                 </div>
 
-                <div class="p-4 rounded-md bg-paperAlt dark:bg-night border border-zinc-200 dark:border-zinc-800">
+                <div class="p-4 rounded-md bg-paperAlt dark:bg-night border border-sand dark:border-nightBorder">
                     <h4 class="font-mono text-xs uppercase tracking-wider text-ink dark:text-nightInk mb-1.5">2. Metodologi &amp; Tools</h4>
                     <p id="modal-methodology" class="text-inkMuted dark:text-nightMuted leading-relaxed"></p>
                 </div>
 
-                <div class="p-4 rounded-md bg-paperAlt dark:bg-night border border-zinc-200 dark:border-zinc-800">
+                <div class="p-4 rounded-md bg-paperAlt dark:bg-night border border-sand dark:border-nightBorder">
                     <h4 class="font-mono text-xs uppercase tracking-wider text-ink dark:text-nightInk mb-1.5">3. Hasil &amp; Dampak</h4>
                     <p id="modal-impact" class="text-inkMuted dark:text-nightMuted leading-relaxed"></p>
                 </div>
@@ -914,11 +917,11 @@
                 <div id="modal-tags" class="flex flex-wrap gap-2 font-mono text-xs"></div>
             </div>
 
-            <div class="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 pt-4 border-t border-zinc-200 dark:border-zinc-800">
-                <a id="modal-github-link" href="https://github.com/shafwanmumtaz" target="_blank" rel="noopener noreferrer" class="min-h-[44px] px-5 py-2.5 rounded-md bg-pine dark:bg-tealBright text-white dark:text-night font-semibold text-sm hover:opacity-90 transition-opacity flex items-center justify-center">
+            <div class="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 pt-4 border-t border-sand dark:border-nightBorder">
+                <a id="modal-github-link" href="https://github.com/shafwanmumtaz" target="_blank" rel="noopener noreferrer" class="min-h-[44px] px-5 py-2.5 rounded-md bg-terracotta dark:bg-copper text-ivory dark:text-night font-semibold text-sm hover:opacity-90 transition-opacity flex items-center justify-center">
                     Lihat Repositori di GitHub
                 </a>
-                <button type="button" onclick="closeProjectModal()" class="min-h-[44px] px-5 py-2.5 rounded-md border border-zinc-300 dark:border-zinc-700 text-ink dark:text-nightInk text-sm font-medium hover:border-pine dark:hover:border-tealBright transition-colors">
+                <button type="button" onclick="closeProjectModal()" class="min-h-[44px] px-5 py-2.5 rounded-md border border-sand dark:border-nightBorder text-ink dark:text-nightInk text-sm font-medium hover:border-terracotta dark:hover:border-copper transition-colors">
                     Tutup
                 </button>
             </div>
@@ -1028,13 +1031,13 @@
             btn.addEventListener('click', () => {
                 filterBtns.forEach(b => {
                     b.setAttribute('aria-pressed', 'false');
-                    b.classList.remove('bg-pine', 'dark:bg-tealBright', 'text-white', 'dark:text-night', 'font-semibold');
-                    b.classList.add('border', 'border-zinc-300', 'dark:border-zinc-700', 'bg-white', 'dark:bg-nightAlt', 'text-ink', 'dark:text-nightInk', 'font-medium');
+                    b.classList.remove('bg-terracotta', 'dark:bg-copper', 'text-ivory', 'dark:text-night', 'font-semibold');
+                    b.classList.add('border', 'border-sand', 'dark:border-nightBorder', 'bg-ivory', 'dark:bg-nightAlt', 'text-ink', 'dark:text-nightInk', 'font-medium');
                 });
 
                 btn.setAttribute('aria-pressed', 'true');
-                btn.classList.remove('border', 'border-zinc-300', 'dark:border-zinc-700', 'bg-white', 'dark:bg-nightAlt', 'text-ink', 'dark:text-nightInk', 'font-medium');
-                btn.classList.add('bg-pine', 'dark:bg-tealBright', 'text-white', 'dark:text-night', 'font-semibold');
+                btn.classList.remove('border', 'border-sand', 'dark:border-nightBorder', 'bg-ivory', 'dark:bg-nightAlt', 'text-ink', 'dark:text-nightInk', 'font-medium');
+                btn.classList.add('bg-terracotta', 'dark:bg-copper', 'text-ivory', 'dark:text-night', 'font-semibold');
 
                 const filterValue = btn.getAttribute('data-filter');
                 if (filterTimer) clearTimeout(filterTimer);
@@ -1156,7 +1159,7 @@
             modalTags.innerHTML = '';
             data.tags.forEach(tag => {
                 const span = document.createElement('span');
-                span.className = 'px-2.5 py-1 rounded bg-paperAlt dark:bg-night text-inkMuted dark:text-nightMuted border border-zinc-200 dark:border-zinc-700';
+                span.className = 'px-2.5 py-1 rounded bg-paperAlt dark:bg-night text-inkMuted dark:text-nightMuted border border-sand dark:border-nightBorder';
                 span.textContent = tag;
                 modalTags.appendChild(span);
             });
