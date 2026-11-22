@@ -14,6 +14,7 @@
     <!-- Tailwind CSS CDN (defer-safe config before script) -->
     <script>
         (function () {
+            document.documentElement.classList.add('js-anim');
             try {
                 var saved = localStorage.getItem('theme');
                 var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -100,6 +101,33 @@
             outline-offset: 2px;
         }
 
+        /* MOTION 2: Editorial horizontal mask reveal & staggered card transitions */
+        html.js-anim .reveal-item {
+            opacity: 0;
+            clip-path: inset(0 4% 0 0);
+            transform: translateX(-12px);
+            transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+                        transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+                        clip-path 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        html.js-anim .reveal-item.is-visible {
+            opacity: 1;
+            clip-path: inset(0 0 0 0);
+            transform: translateX(0);
+        }
+
+        .project-card {
+            transition: opacity 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+                        transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+                        border-color 0.2s ease;
+        }
+
+        .project-card.is-filtering-out {
+            opacity: 0;
+            transform: scale(0.97);
+        }
+
         /* R-39: Respect reduced motion */
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
@@ -107,6 +135,11 @@
                 animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
                 scroll-behavior: auto !important;
+            }
+            html.js-anim .reveal-item {
+                opacity: 1 !important;
+                clip-path: none !important;
+                transform: none !important;
             }
         }
 
@@ -241,7 +274,7 @@
                         </div>
                         <div class="flex flex-col sm:flex-row sm:justify-between gap-1">
                             <dt class="text-inkMuted dark:text-nightMuted">Ketersediaan</dt>
-                            <dd class="font-medium text-pine dark:text-tealBright sm:text-right">Magang / Junior Data Analyst</dd>
+                            <dd class="font-medium text-pine dark:text-tealBright sm:text-right">Full-time, Freelance, &amp; Magang</dd>
                         </div>
                     </dl>
                 </aside>
@@ -250,7 +283,7 @@
 
         <!-- ================= TENTANG & PENDIDIKAN ================= -->
         <section id="tentang" class="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto border-b border-zinc-200 dark:border-zinc-800">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
+            <div class="reveal-item grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
                 <div class="lg:col-span-7 space-y-5">
                     <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-ink dark:text-nightInk">
                         Latar Belakang
@@ -299,6 +332,7 @@
 
         <!-- ================= PENGALAMAN ================= -->
         <section id="pengalaman" class="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto border-b border-zinc-200 dark:border-zinc-800">
+            <div class="reveal-item">
             <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-ink dark:text-nightInk mb-8">
                 Pengalaman Kerja &amp; Organisasi
             </h2>
@@ -338,11 +372,12 @@
                     </div>
                 </article>
             </div>
+            </div>
         </section>
 
         <!-- ================= PROYEK & STUDI KASUS ================= -->
         <section id="proyek" class="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto border-b border-zinc-200 dark:border-zinc-800">
-            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+            <div class="reveal-item flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
                 <div>
                     <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-ink dark:text-nightInk">
                         Studi Kasus &amp; Proyek
@@ -561,6 +596,7 @@
 
         <!-- ================= KEAHLIAN (TANPA PERSENTASE BUATAN) ================= -->
         <section id="keahlian" class="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto border-b border-zinc-200 dark:border-zinc-800">
+            <div class="reveal-item">
             <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-ink dark:text-nightInk mb-3">
                 Keahlian &amp; Alat Kerja
             </h2>
@@ -602,16 +638,17 @@
                     </ul>
                 </div>
             </div>
+            </div>
         </section>
 
         <!-- ================= KONTAK ================= -->
         <section id="kontak" class="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-            <div class="max-w-2xl mb-8">
+            <div class="reveal-item max-w-2xl mb-8">
                 <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-ink dark:text-nightInk mb-3">
                     Kontak &amp; Kolaborasi
                 </h2>
                 <p class="text-sm sm:text-base text-inkMuted dark:text-nightMuted leading-relaxed">
-                    Terbuka untuk peluang magang, posisi Junior Data Analyst, atau diskusi proyek pengolahan data.
+                    Terbuka untuk peluang kerja penuh waktu, proyek freelance, magang, maupun kolaborasi di bidang analisis data dan pengembangan sistem.
                 </p>
             </div>
 
@@ -652,6 +689,24 @@
                     </div>
                 </div>
 
+                <!-- LinkedIn -->
+                <div class="p-5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-nightAlt flex flex-col justify-between gap-4 min-w-0">
+                    <div class="min-w-0">
+                        <span class="font-mono text-xs text-inkMuted dark:text-nightMuted block mb-1">LinkedIn</span>
+                        <a href="https://www.linkedin.com/in/shafwan-mumtaz-433927370/" target="_blank" rel="noopener noreferrer" class="text-base font-semibold text-ink dark:text-nightInk hover:text-pine dark:hover:text-tealBright break-all [overflow-wrap:anywhere]">
+                            linkedin.com/in/shafwan-mumtaz-433927370
+                        </a>
+                    </div>
+                    <div class="flex flex-wrap gap-2 pt-3 border-t border-zinc-100 dark:border-zinc-800">
+                        <button type="button" onclick="copyText('https://www.linkedin.com/in/shafwan-mumtaz-433927370/', 'URL LinkedIn')" class="min-h-[44px] flex-1 px-3 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 hover:border-pine dark:hover:border-tealBright text-xs font-semibold text-ink dark:text-nightInk transition-colors">
+                            Salin URL
+                        </button>
+                        <a href="https://www.linkedin.com/in/shafwan-mumtaz-433927370/" target="_blank" rel="noopener noreferrer" class="min-h-[44px] flex-1 px-3 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 hover:border-pine dark:hover:border-tealBright text-xs font-semibold text-ink dark:text-nightInk flex items-center justify-center transition-colors">
+                            Buka Profil
+                        </a>
+                    </div>
+                </div>
+
                 <!-- Telepon / WhatsApp -->
                 <div class="p-5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-nightAlt flex items-center justify-between gap-4 min-w-0">
                     <div class="min-w-0">
@@ -666,7 +721,7 @@
                 </div>
 
                 <!-- Domisili -->
-                <div class="p-5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-nightAlt flex items-center min-w-0">
+                <div class="md:col-span-2 p-5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-nightAlt flex items-center min-w-0">
                     <div>
                         <span class="font-mono text-xs text-inkMuted dark:text-nightMuted block mb-1">Domisili</span>
                         <p class="text-base font-semibold text-ink dark:text-nightInk">
@@ -777,10 +832,27 @@
             });
         });
 
-        // Filter Kategori Proyek
+        // Scroll-Reveal (Editorial horizontal mask)
+        const revealItems = document.querySelectorAll('.reveal-item');
+        if ('IntersectionObserver' in window) {
+            const revealObserver = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+            revealItems.forEach(item => revealObserver.observe(item));
+        } else {
+            revealItems.forEach(item => item.classList.add('is-visible'));
+        }
+
+        // Filter Kategori Proyek dengan transisi scale & stagger
         const filterBtns = document.querySelectorAll('.filter-btn');
         const projectCards = document.querySelectorAll('.project-card');
         const projectsEmpty = document.getElementById('projects-empty');
+        let filterTimer = null;
 
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -795,18 +867,32 @@
                 btn.classList.add('bg-pine', 'dark:bg-tealBright', 'text-white', 'dark:text-night', 'font-semibold');
 
                 const filterValue = btn.getAttribute('data-filter');
-                let visibleCount = 0;
+                if (filterTimer) clearTimeout(filterTimer);
 
                 projectCards.forEach(card => {
-                    if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
-                        card.style.display = 'flex';
-                        visibleCount++;
-                    } else {
-                        card.style.display = 'none';
-                    }
+                    card.style.transitionDelay = '0ms';
+                    card.classList.add('is-filtering-out');
                 });
 
-                projectsEmpty.classList.toggle('hidden', visibleCount > 0);
+                filterTimer = setTimeout(() => {
+                    let visibleIndex = 0;
+                    projectCards.forEach(card => {
+                        const match = filterValue === 'all' || card.getAttribute('data-category') === filterValue;
+                        if (match) {
+                            card.style.display = 'flex';
+                            card.style.transitionDelay = (visibleIndex * 45) + 'ms';
+                            visibleIndex++;
+                            requestAnimationFrame(() => {
+                                requestAnimationFrame(() => {
+                                    card.classList.remove('is-filtering-out');
+                                });
+                            });
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                    projectsEmpty.classList.toggle('hidden', visibleIndex > 0);
+                }, 160);
             });
         });
 
