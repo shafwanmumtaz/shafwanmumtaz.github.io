@@ -3,34 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shafwan Mumtaz | Aspiring Data Analyst & Informatics Portfolio</title>
-    
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <title>Shafwan Mumtaz | Portofolio Data Analyst &amp; Teknik Informatika</title>
+    <meta name="description" content="Portofolio Shafwan Mumtaz, mahasiswa Teknik Informatika Universitas Pamulang dan staf operasional PT Mumtaz Catering. Studi kasus Python, Excel, SQL, dan otomasi.">
+
+    <!-- Google Fonts: Newsreader (Editorial Display), Plus Jakarta Sans (Body), IBM Plex Mono (Data & File Tags) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome untuk Ikon -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Konfigurasi Tailwind Custom -->
+    <!-- Tailwind CSS CDN (defer-safe config before script) -->
+    <script>
+        (function () {
+            try {
+                var saved = localStorage.getItem('theme');
+                var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (saved === 'dark' || (!saved && prefersDark)) {
+                    document.documentElement.classList.add('dark');
+                }
+            } catch (e) {}
+        })();
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
+                        serif: ['Newsreader', 'Georgia', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+                        mono: ['IBM Plex Mono', 'monospace'],
                     },
                     colors: {
-                        darkBg: '#0a0f1c',
-                        cardBg: '#111827',
-                        accentCyan: '#06b6d4',
-                        accentEmerald: '#10b981',
-                        accentIndigo: '#6366f1',
+                        paper: '#FAF9F6',
+                        paperAlt: '#F3F1EC',
+                        ink: '#18181B',
+                        inkMuted: '#52525B',
+                        pine: '#0F766E',
+                        night: '#111315',
+                        nightAlt: '#1A1D21',
+                        nightInk: '#F4F4F5',
+                        nightMuted: '#A1A1AA',
+                        tealBright: '#2DD4BF',
                     }
                 }
             }
@@ -38,1098 +52,774 @@
     </script>
 
     <style>
-        /* Custom CSS untuk Animasi & Efek Visual */
+        :root {
+            --bg-page: #FAF9F6;
+            --bg-surface: #FFFFFF;
+            --bg-subtle: #F3F1EC;
+            --text-primary: #18181B;
+            --text-muted: #52525B;
+            --border-color: #E4E4E7;
+            --accent: #0F766E;
+            --accent-ink: #FFFFFF;
+        }
+
+        html.dark {
+            --bg-page: #111315;
+            --bg-surface: #1A1D21;
+            --bg-subtle: #20242A;
+            --text-primary: #F4F4F5;
+            --text-muted: #A1A1AA;
+            --border-color: #27272A;
+            --accent: #2DD4BF;
+            --accent-ink: #111315;
+        }
+
         body {
-            background-color: #0a0f1c;
-            color: #f8fafc;
+            background-color: var(--bg-page);
+            color: var(--text-primary);
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
             overflow-x: hidden;
         }
 
-        /* Canvas Latar Belakang Jaringan Data */
-        #network-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
+        /* R-39: Pointer cursor on enabled interactive controls */
+        a[href],
+        button:not(:disabled),
+        summary,
+        [role="button"]:not([aria-disabled="true"]) {
+            cursor: pointer;
         }
 
-        /* Efek Glassmorphism */
-        .glass {
-            background: rgba(17, 24, 39, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+        button:disabled,
+        [aria-disabled="true"] {
+            cursor: not-allowed;
         }
 
-        .glass-card {
-            background: linear-gradient(145deg, rgba(17, 24, 39, 0.85), rgba(15, 23, 42, 0.9));
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(56, 189, 248, 0.15);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        /* R-32: High-contrast keyboard focus ring */
+        :focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
         }
 
-        .glass-card:hover {
-            transform: translateY(-6px);
-            border-color: rgba(6, 182, 212, 0.5);
-            box-shadow: 0 15px 35px -10px rgba(6, 182, 212, 0.25);
+        /* R-39: Respect reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
         }
 
-        /* Animasi Scroll Reveal */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        .skip-link {
+            position: absolute;
+            top: -100%;
+            left: 1rem;
+            z-index: 100;
+            padding: 0.75rem 1rem;
+            background: var(--accent);
+            color: var(--accent-ink);
+            font-weight: 600;
+            border-radius: 0.375rem;
         }
 
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Kursor Berkedip pada Efek Ketik */
-        .typing-cursor {
-            display: inline-block;
-            width: 3px;
-            background-color: #06b6d4;
-            animation: blink 0.8s infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        /* Animasi Melayang Halus */
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .animate-float {
-            animation: float 5s ease-in-out infinite;
-        }
-
-        /* Gradien Teks */
-        .text-gradient {
-            background: linear-gradient(to right, #06b6d4, #10b981, #6366f1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0a0f1c;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #1e293b;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #06b6d4;
+        .skip-link:focus {
+            top: 1rem;
         }
     </style>
 </head>
-<body class="antialiased selection:bg-cyan-500 selection:text-white">
+<body class="antialiased selection:bg-pine selection:text-white dark:selection:bg-tealBright dark:selection:text-night">
 
-    <!-- Canvas Latar Belakang Animasi Jaringan Data -->
-    <canvas id="network-canvas"></canvas>
+    <a href="#konten-utama" class="skip-link">Langsung ke konten utama</a>
 
-    <!-- Dekorasi Cahaya Ambient (Glow) -->
-    <div class="fixed top-20 left-10 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl -z-10 pointer-events-none"></div>
-    <div class="fixed bottom-20 right-10 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl -z-10 pointer-events-none"></div>
-
-    <!-- Navigasi Utama (Sticky Glassmorphism) -->
-    <header class="fixed top-0 w-full z-50 glass border-b border-slate-800/80 transition-all duration-300" id="navbar">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <!-- Logo / Nama Brand -->
-                <a href="#" class="flex items-center space-x-2 group">
-                    <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-500 to-emerald-500 flex items-center justify-center text-slate-950 font-bold font-mono text-lg shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform">
-                        SM
-                    </div>
-                    <span class="font-bold text-lg tracking-tight text-slate-100 group-hover:text-cyan-400 transition-colors">
-                        Shafwan<span class="text-cyan-400">.data</span>
-                    </span>
+    <!-- ================= HEADER & NAVIGASI ================= -->
+    <header class="sticky top-0 z-40 border-b border-zinc-200 dark:border-zinc-800 bg-paper/95 dark:bg-night/95">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 gap-4">
+                <a href="#" class="font-serif text-xl font-semibold tracking-tight text-ink dark:text-nightInk hover:text-pine dark:hover:text-tealBright transition-colors py-2">
+                    Shafwan Mumtaz
                 </a>
 
-                <!-- Menu Desktop -->
-                <nav class="hidden md:flex items-center space-x-7 text-sm font-medium text-slate-300">
-                    <a href="#tentang" class="hover:text-cyan-400 transition-colors py-2">Tentang</a>
-                    <a href="#pengalaman" class="hover:text-cyan-400 transition-colors py-2">Pengalaman</a>
-                    <a href="#proyek" class="hover:text-cyan-400 transition-colors py-2">Proyek & Studi Kasus</a>
-                    <a href="#keahlian" class="hover:text-cyan-400 transition-colors py-2">Keahlian</a>
-                    <a href="#kontak" class="px-4 py-2 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 hover:bg-cyan-500 hover:text-slate-950 font-semibold transition-all">
-                        Kontak
-                    </a>
+                <nav aria-label="Navigasi utama" class="hidden md:flex items-center gap-6 text-sm font-medium text-inkMuted dark:text-nightMuted">
+                    <a href="#tentang" class="hover:text-ink dark:hover:text-nightInk transition-colors py-2.5">Tentang</a>
+                    <a href="#pengalaman" class="hover:text-ink dark:hover:text-nightInk transition-colors py-2.5">Pengalaman</a>
+                    <a href="#proyek" class="hover:text-ink dark:hover:text-nightInk transition-colors py-2.5">Studi Kasus</a>
+                    <a href="#keahlian" class="hover:text-ink dark:hover:text-nightInk transition-colors py-2.5">Keahlian</a>
+                    <a href="#kontak" class="hover:text-ink dark:hover:text-nightInk transition-colors py-2.5">Kontak</a>
                 </nav>
 
-                <!-- Tombol Hamburger Mobile -->
-                <button id="mobile-menu-btn" aria-label="Buka Menu" class="md:hidden p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 focus:outline-none">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
+                <div class="flex items-center gap-2">
+                    <button
+                        type="button"
+                        id="theme-toggle"
+                        aria-label="Ubah tema terang atau gelap"
+                        aria-pressed="false"
+                        class="min-h-[44px] min-w-[44px] px-3 rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-nightAlt text-ink dark:text-nightInk hover:border-pine dark:hover:border-tealBright text-xs font-mono flex items-center justify-center gap-2 transition-colors"
+                    >
+                        <svg id="icon-sun" class="w-4 h-4 hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <circle cx="12" cy="12" r="4"></circle>
+                            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+                        </svg>
+                        <svg id="icon-moon" class="w-4 h-4 block dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                        <span id="theme-label" class="hidden sm:inline">Gelap</span>
+                    </button>
+
+                    <button
+                        type="button"
+                        id="mobile-menu-btn"
+                        aria-label="Buka menu navigasi"
+                        aria-expanded="false"
+                        aria-controls="mobile-menu"
+                        class="md:hidden min-h-[44px] min-w-[44px] px-3 rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-nightAlt text-ink dark:text-nightInk text-sm font-medium flex items-center justify-center gap-1.5"
+                    >
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <path d="M3 6h18M3 12h18M3 18h18"></path>
+                        </svg>
+                        <span>Menu</span>
+                    </button>
+                </div>
             </div>
         </div>
 
-        <!-- Dropdown Menu Mobile -->
-        <div id="mobile-menu" class="hidden md:hidden glass border-t border-slate-800 px-4 pt-2 pb-4 space-y-2">
-            <a href="#tentang" class="mobile-link block px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800/70 hover:text-cyan-400">Tentang</a>
-            <a href="#pengalaman" class="mobile-link block px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800/70 hover:text-cyan-400">Pengalaman</a>
-            <a href="#proyek" class="mobile-link block px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800/70 hover:text-cyan-400">Proyek & Studi Kasus</a>
-            <a href="#keahlian" class="mobile-link block px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800/70 hover:text-cyan-400">Keahlian</a>
-            <a href="#kontak" class="mobile-link block px-3 py-2.5 rounded-lg text-cyan-400 font-semibold hover:bg-slate-800/70">Kontak</a>
-        </div>
+        <nav id="mobile-menu" aria-label="Navigasi seluler" class="hidden md:hidden border-t border-zinc-200 dark:border-zinc-800 bg-paper dark:bg-night px-4 py-3 space-y-1">
+            <a href="#tentang" class="mobile-link block px-3 py-3 rounded-md text-sm font-medium text-ink dark:text-nightInk hover:bg-paperAlt dark:hover:bg-nightAlt">Tentang</a>
+            <a href="#pengalaman" class="mobile-link block px-3 py-3 rounded-md text-sm font-medium text-ink dark:text-nightInk hover:bg-paperAlt dark:hover:bg-nightAlt">Pengalaman</a>
+            <a href="#proyek" class="mobile-link block px-3 py-3 rounded-md text-sm font-medium text-ink dark:text-nightInk hover:bg-paperAlt dark:hover:bg-nightAlt">Studi Kasus</a>
+            <a href="#keahlian" class="mobile-link block px-3 py-3 rounded-md text-sm font-medium text-ink dark:text-nightInk hover:bg-paperAlt dark:hover:bg-nightAlt">Keahlian</a>
+            <a href="#kontak" class="mobile-link block px-3 py-3 rounded-md text-sm font-semibold text-pine dark:text-tealBright hover:bg-paperAlt dark:hover:bg-nightAlt">Kontak</a>
+        </nav>
     </header>
 
-    <main>
+    <main id="konten-utama">
         <!-- ================= HERO SECTION ================= -->
-        <section class="min-h-screen flex items-center pt-24 pb-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
-                
-                <!-- Kolom Kiri: Teks & CTA -->
-                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-                    <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs sm:text-sm font-mono">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                        <span>Tangerang, Banten • Open to Data Analyst Opportunities</span>
-                    </div>
-
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
-                        Halo, Saya <br>
-                        <span class="text-gradient">Shafwan Mumtaz</span>
-                    </h1>
-
-                    <!-- Teks Animasi Ketik (Typing Effect) -->
-                    <div class="h-8 sm:h-10 flex items-center justify-center lg:justify-start">
-                        <span class="font-mono text-lg sm:text-2xl text-slate-300">
-                            &gt; <span id="typed-text" class="text-cyan-400 font-semibold"></span><span class="typing-cursor">&nbsp;</span>
-                        </span>
-                    </div>
-
-                    <p class="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                        Mahasiswa Teknik Informatika di <strong class="text-slate-200">Universitas Pamulang</strong> yang menggabungkan pengalaman operasional lapangan dengan kemampuan analisis data menggunakan <span class="text-cyan-400">Python</span>, <span class="text-emerald-400">Microsoft Excel</span>, dan <span class="text-indigo-400">SQL</span> untuk menghasilkan keputusan berbasis data.
+        <section class="py-12 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto border-b border-zinc-200 dark:border-zinc-800">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+                <div class="lg:col-span-7 space-y-6">
+                    <p class="font-mono text-xs sm:text-sm text-pine dark:text-tealBright">
+                        Tangerang, Banten / Teknik Informatika &amp; Analisis Data
                     </p>
 
-                    <!-- Tombol CTA -->
-                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
-                        <a href="#proyek" class="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 text-slate-950 font-bold shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-105 transition-all flex items-center justify-center gap-2">
-                            <i class="fas fa-chart-line"></i>
-                            <span>Eksplorasi Studi Kasus</span>
+                    <h1 class="font-serif font-semibold tracking-tight text-ink dark:text-nightInk leading-[1.12]" style="font-size: clamp(2.25rem, 5vw, 3.5rem);">
+                        Shafwan Mumtaz
+                    </h1>
+
+                    <p class="text-base sm:text-lg text-inkMuted dark:text-nightMuted leading-relaxed max-w-2xl">
+                        Mahasiswa S1 Teknik Informatika di <strong class="font-semibold text-ink dark:text-nightInk">Universitas Pamulang</strong> dan staf operasional di <strong class="font-semibold text-ink dark:text-nightInk">PT Mumtaz Catering</strong>. Terbiasa mengolah catatan distribusi B2B dan membersihkan dataset menggunakan Python, Microsoft Excel, dan SQL menjadi laporan yang siap dipakai mengambil keputusan.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
+                        <a href="#proyek" class="min-h-[44px] px-6 py-3 rounded-md bg-pine dark:bg-tealBright text-white dark:text-night font-semibold text-sm hover:opacity-90 transition-opacity flex items-center justify-center">
+                            Lihat 6 Studi Kasus
                         </a>
-                        <a href="https://github.com/shafwanmumtaz" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-7 py-3.5 rounded-xl glass hover:bg-slate-800/80 text-slate-200 font-semibold border border-slate-700 hover:border-cyan-500/50 transition-all flex items-center justify-center gap-2">
-                            <i class="fab fa-github text-cyan-400 text-lg"></i>
+                        <a href="https://github.com/shafwanmumtaz" target="_blank" rel="noopener noreferrer" class="min-h-[44px] px-6 py-3 rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-nightAlt text-ink dark:text-nightInk hover:border-pine dark:hover:border-tealBright font-semibold text-sm transition-colors flex items-center justify-center gap-2">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
+                            </svg>
                             <span>GitHub (@shafwanmumtaz)</span>
                         </a>
                     </div>
                 </div>
 
-                <!-- Kolom Kanan: Kartu Terminal Kode & Visual Data Animasi -->
+                <!-- Ringkasan Fakta Terstruktur -->
+                <aside aria-label="Ringkasan profil" class="lg:col-span-5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-nightAlt p-5 sm:p-6">
+                    <h2 class="font-mono text-xs uppercase tracking-wider text-inkMuted dark:text-nightMuted pb-3 mb-4 border-b border-zinc-200 dark:border-zinc-800">
+                        Ringkasan Fakta
+                    </h2>
+                    <dl class="space-y-3.5 text-sm">
+                        <div class="flex flex-col sm:flex-row sm:justify-between gap-1 pb-3 border-b border-zinc-100 dark:border-zinc-800/80">
+                            <dt class="text-inkMuted dark:text-nightMuted">Peran Saat Ini</dt>
+                            <dd class="font-medium text-ink dark:text-nightInk sm:text-right">Operational Staff, PT Mumtaz Catering</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:justify-between gap-1 pb-3 border-b border-zinc-100 dark:border-zinc-800/80">
+                            <dt class="text-inkMuted dark:text-nightMuted">Pendidikan</dt>
+                            <dd class="font-medium text-ink dark:text-nightInk sm:text-right">S1 Teknik Informatika, UNPAM</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:justify-between gap-1 pb-3 border-b border-zinc-100 dark:border-zinc-800/80">
+                            <dt class="text-inkMuted dark:text-nightMuted">Alat Utama</dt>
+                            <dd class="font-mono text-xs sm:text-sm text-ink dark:text-nightInk sm:text-right">Python, Excel, SQL</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:justify-between gap-1">
+                            <dt class="text-inkMuted dark:text-nightMuted">Ketersediaan</dt>
+                            <dd class="font-medium text-pine dark:text-tealBright sm:text-right">Magang / Junior Data Analyst</dd>
+                        </div>
+                    </dl>
+                </aside>
+            </div>
+        </section>
+
+        <!-- ================= TENTANG & PENDIDIKAN ================= -->
+        <section id="tentang" class="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto border-b border-zinc-200 dark:border-zinc-800">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
+                <div class="lg:col-span-7 space-y-5">
+                    <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-ink dark:text-nightInk">
+                        Latar Belakang
+                    </h2>
+                    <p class="text-inkMuted dark:text-nightMuted leading-relaxed">
+                        Saya menggabungkan pekerjaan operasional lapangan dengan teknik pengolahan data. Menangani pencatatan distribusi dan inventaris di katering korporat membuat saya terbiasa memastikan angka di lapangan cocok dengan laporan tertulis.
+                    </p>
+                    <p class="text-inkMuted dark:text-nightMuted leading-relaxed">
+                        Di luar pekerjaan operasional, saya mengerjakan studi kasus pembersihan data, eksplorasi dataset publik, analisis penjualan dengan Pivot Table, serta menulis skrip Python untuk merapikan file kerja secara otomatis.
+                    </p>
+
+                    <div class="pt-4">
+                        <h3 class="text-sm font-semibold text-ink dark:text-nightInk mb-3">Pelatihan &amp; Sertifikasi</h3>
+                        <ul class="space-y-2.5 text-sm">
+                            <li class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 py-2.5 px-4 rounded-md bg-paperAlt dark:bg-nightAlt border border-zinc-200 dark:border-zinc-800">
+                                <span class="font-medium text-ink dark:text-nightInk">Fullstack Data Analyst Training</span>
+                                <span class="font-mono text-xs text-inkMuted dark:text-nightMuted">Rocket Tutor</span>
+                            </li>
+                            <li class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 py-2.5 px-4 rounded-md bg-paperAlt dark:bg-nightAlt border border-zinc-200 dark:border-zinc-800">
+                                <span class="font-medium text-ink dark:text-nightInk">The Freelance Starter Program</span>
+                                <span class="font-mono text-xs text-inkMuted dark:text-nightMuted">Professional Readiness</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
                 <div class="lg:col-span-5">
-                    <div class="glass-card rounded-2xl p-5 shadow-2xl animate-float relative overflow-hidden">
-                        <!-- Header Jendela Terminal -->
-                        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-800">
-                            <div class="flex space-x-2">
-                                <span class="w-3 h-3 rounded-full bg-rose-500"></span>
-                                <span class="w-3 h-3 rounded-full bg-amber-400"></span>
-                                <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
-                            </div>
-                            <span class="text-xs font-mono text-slate-400">Data_analiys_Shafwan_Mumtaz.ipynb</span>
-                            <span class="text-xs font-mono text-emerald-400 flex items-center gap-1">
-                                <i class="fas fa-circle text-[8px]"></i> Kernel Active
+                    <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-ink dark:text-nightInk mb-5">
+                        Pendidikan
+                    </h2>
+                    <div class="space-y-6 border-l-2 border-zinc-200 dark:border-zinc-800 pl-5">
+                        <div>
+                            <p class="font-mono text-xs text-pine dark:text-tealBright mb-1">Saat Ini (Kelas 04TPLE005)</p>
+                            <h3 class="text-base font-semibold text-ink dark:text-nightInk">Universitas Pamulang (UNPAM)</h3>
+                            <p class="text-sm text-inkMuted dark:text-nightMuted mt-0.5">S1 Teknik Informatika</p>
+                        </div>
+                        <div>
+                            <p class="font-mono text-xs text-inkMuted dark:text-nightMuted mb-1">Lulusan</p>
+                            <h3 class="text-base font-semibold text-ink dark:text-nightInk">SMAN 4 Tangerang</h3>
+                            <p class="text-sm text-inkMuted dark:text-nightMuted mt-0.5">Jurusan Ilmu Pengetahuan Alam (IPA)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PENGALAMAN ================= -->
+        <section id="pengalaman" class="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto border-b border-zinc-200 dark:border-zinc-800">
+            <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-ink dark:text-nightInk mb-8">
+                Pengalaman Kerja &amp; Organisasi
+            </h2>
+
+            <div class="divide-y divide-zinc-200 dark:divide-zinc-800">
+                <!-- Pengalaman 1 -->
+                <article class="py-6 first:pt-0 grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8">
+                    <div class="md:col-span-4 space-y-1">
+                        <p class="font-mono text-xs text-pine dark:text-tealBright">Juli 2024 - Sekarang</p>
+                        <h3 class="text-lg font-semibold text-ink dark:text-nightInk">Operational Staff</h3>
+                        <p class="text-sm font-medium text-inkMuted dark:text-nightMuted">PT Mumtaz Catering</p>
+                    </div>
+                    <div class="md:col-span-8">
+                        <ul class="space-y-2 text-sm sm:text-base text-inkMuted dark:text-nightMuted leading-relaxed list-disc pl-5">
+                            <li>Mengelola operasional katering harian serta pencatatan distribusi ratusan porsi makan karyawan per periode, termasuk rekap <strong class="font-semibold text-ink dark:text-nightInk">516 porsi</strong> untuk klien korporat Pakons Prime Hotel pada shift Lunch, Dinner, dan Supper.</li>
+                            <li>Memantau stok bahan baku secara berkala untuk menjaga ketersediaan dan menekan pemborosan.</li>
+                            <li>Berkoordinasi lintas divisi (dapur, pengemasan, dan pengiriman) agar distribusi tepat waktu sesuai jadwal klien.</li>
+                            <li>Menangani kendala operasional lapangan dan keluhan pelanggan secara langsung.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- Pengalaman 2 -->
+                <article class="py-6 last:pb-0 grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8">
+                    <div class="md:col-span-4 space-y-1">
+                        <p class="font-mono text-xs text-inkMuted dark:text-nightMuted">Desember 2023</p>
+                        <h3 class="text-lg font-semibold text-ink dark:text-nightInk">Volunteer, Logistics Division</h3>
+                        <p class="text-sm font-medium text-inkMuted dark:text-nightMuted">Event Konser Bhineka</p>
+                    </div>
+                    <div class="md:col-span-8">
+                        <ul class="space-y-2 text-sm sm:text-base text-inkMuted dark:text-nightMuted leading-relaxed list-disc pl-5">
+                            <li>Memeriksa, memverifikasi, dan mendata inventaris kebutuhan operasional dari setiap divisi kepanitiaan sebelum dan selama acara.</li>
+                            <li>Mengatur alur distribusi perlengkapan agar tersedia tepat waktu di setiap titik lokasi kegiatan.</li>
+                            <li>Berkoordinasi dengan panitia inti dan vendor eksternal untuk kelancaran suplai logistik.</li>
+                            <li>Menyusun laporan penggunaan serta pengembalian barang inventaris setelah acara selesai.</li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ================= PROYEK & STUDI KASUS ================= -->
+        <section id="proyek" class="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto border-b border-zinc-200 dark:border-zinc-800">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+                <div>
+                    <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-ink dark:text-nightInk">
+                        Studi Kasus &amp; Proyek
+                    </h2>
+                    <p class="text-sm text-inkMuted dark:text-nightMuted mt-2 max-w-xl">
+                        Pengolahan data kuliah Data Mining, pembersihan data Excel, pelaporan operasional, hingga skrip otomasi Python.
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap gap-2" role="group" aria-label="Filter kategori proyek" id="project-filters">
+                    <button type="button" class="filter-btn min-h-[44px] px-4 py-2 rounded-md text-xs sm:text-sm font-semibold bg-pine dark:bg-tealBright text-white dark:text-night transition-colors" data-filter="all" aria-pressed="true">
+                        Semua (6)
+                    </button>
+                    <button type="button" class="filter-btn min-h-[44px] px-4 py-2 rounded-md text-xs sm:text-sm font-medium border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-nightAlt text-ink dark:text-nightInk hover:border-pine dark:hover:border-tealBright transition-colors" data-filter="python-dm" aria-pressed="false">
+                        Python &amp; Data Mining
+                    </button>
+                    <button type="button" class="filter-btn min-h-[44px] px-4 py-2 rounded-md text-xs sm:text-sm font-medium border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-nightAlt text-ink dark:text-nightInk hover:border-pine dark:hover:border-tealBright transition-colors" data-filter="excel-ba" aria-pressed="false">
+                        Excel &amp; Analytics
+                    </button>
+                    <button type="button" class="filter-btn min-h-[44px] px-4 py-2 rounded-md text-xs sm:text-sm font-medium border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-nightAlt text-ink dark:text-nightInk hover:border-pine dark:hover:border-tealBright transition-colors" data-filter="automation" aria-pressed="false">
+                        Automation
+                    </button>
+                </div>
+            </div>
+
+            <div id="projects-empty" class="hidden py-10 px-6 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-paperAlt dark:bg-nightAlt text-center text-sm text-inkMuted dark:text-nightMuted">
+                Tidak ada proyek yang cocok dengan kategori ini.
+            </div>
+
+            <!-- Grid Proyek dengan Hierarki (Proyek 1 Featured 2 kolom di desktop) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="projects-grid">
+
+                <!-- Proyek 1 (Featured) -->
+                <article class="project-card md:col-span-2 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-nightAlt p-6 flex flex-col justify-between gap-5 hover:border-pine dark:hover:border-tealBright transition-colors" data-category="python-dm">
+                    <div class="space-y-3">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <span class="font-mono text-xs text-pine dark:text-tealBright">Studi Kasus Utama / Jupyter Notebook</span>
+                            <span class="font-mono text-xs px-2.5 py-1 rounded bg-paperAlt dark:bg-night text-inkMuted dark:text-nightMuted border border-zinc-200 dark:border-zinc-800">
+                                file csv shafwan.csv
                             </span>
                         </div>
-
-                        <!-- Isi Kode Simulasi -->
-                        <pre class="font-mono text-xs sm:text-sm text-slate-300 overflow-x-auto leading-relaxed"><code><span class="text-indigo-400">import</span> pandas <span class="text-indigo-400">as</span> pd
-<span class="text-indigo-400">import</span> numpy <span class="text-indigo-400">as</span> np
-
-<span class="text-slate-500"># Profil & Fokus Analisis Data</span>
-analyst = {
-    <span class="text-emerald-400">"nama"</span>: <span class="text-amber-300">"Shafwan Mumtaz"</span>,
-    <span class="text-emerald-400">"lokasi"</span>: <span class="text-amber-300">"Tangerang, Banten"</span>,
-    <span class="text-emerald-400">"kampus"</span>: <span class="text-amber-300">"Universitas Pamulang"</span>,
-    <span class="text-emerald-400">"tools"</span>: [<span class="text-amber-300">"Python"</span>, <span class="text-amber-300">"Excel Pivot"</span>, <span class="text-amber-300">"SQL"</span>]
-}
-
-<span class="text-slate-500"># Data Cleaning & EDA Pipeline</span>
-df = pd.read_csv(<span class="text-amber-300">"file_csv_shafwan.csv"</span>)
-df_clean = df.dropna().drop_duplicates()
-<span class="text-cyan-400">print</span>(<span class="text-amber-300">f"Dataset Siap: {len(df_clean)} baris valid"</span>)</code></pre>
-
-                        <!-- Mini Grafik Batang Animasi di Bawah Terminal -->
-                        <div class="mt-5 pt-4 border-t border-slate-800/80">
-                            <div class="flex justify-between items-center text-xs text-slate-400 mb-2 font-mono">
-                                <span>Data Cleaning & Standardization Score</span>
-                                <span class="text-emerald-400 font-bold">100% Validated</span>
-                            </div>
-                            <div class="flex items-end space-x-2 h-14 pt-2">
-                                <div class="w-1/6 bg-cyan-500/30 rounded-t h-2/5 hover:bg-cyan-400 transition-all" title="Q1"></div>
-                                <div class="w-1/6 bg-cyan-500/50 rounded-t h-3/5 hover:bg-cyan-400 transition-all" title="Q2"></div>
-                                <div class="w-1/6 bg-indigo-500/50 rounded-t h-2/4 hover:bg-indigo-400 transition-all" title="Q3"></div>
-                                <div class="w-1/6 bg-emerald-500/60 rounded-t h-4/5 hover:bg-emerald-400 transition-all" title="Q4"></div>
-                                <div class="w-1/6 bg-cyan-500/80 rounded-t h-5/6 hover:bg-cyan-400 transition-all" title="EDA"></div>
-                                <div class="w-1/6 bg-gradient-to-t from-cyan-500 to-emerald-400 rounded-t h-full shadow-lg shadow-cyan-500/20" title="Insight"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- ================= TENTANG SAYA & PENDIDIKAN ================= -->
-        <section id="tentang" class="py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-            <div class="reveal">
-                <div class="flex items-center space-x-3 mb-4">
-                    <span class="h-px w-8 bg-cyan-400"></span>
-                    <span class="text-cyan-400 font-mono text-sm uppercase tracking-wider">01. Tentang Saya</span>
-                </div>
-                <h2 class="text-3xl sm:text-4xl font-bold text-slate-100 mb-8">
-                    Mengubah Data Operasional Menjadi <span class="text-gradient">Wawasan Strategis</span>
-                </h2>
-
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                    <!-- Ringkasan Profil -->
-                    <div class="lg:col-span-7 glass-card rounded-2xl p-6 sm:p-8 space-y-4 text-slate-300 leading-relaxed">
-                        <p>
-                            Saya <strong class="text-white">Shafwan Mumtaz</strong>, mahasiswa <strong class="text-cyan-400">Teknik Informatika di Universitas Pamulang (UNPAM)</strong> yang berdomisili di Tangerang, Banten. Saya memiliki minat kuat dalam bidang <strong class="text-emerald-400">Data Analytics</strong>, pengolahan basis data, dan efisiensi operasional.
-                        </p>
-                        <p>
-                            Pengalaman saya menangani pencatatan distribusi dan inventaris di lingkungan kerja nyata melatih ketelitian saya terhadap akurasi angka. Saya memadukan ketelitian tersebut dengan kemampuan teknis di <strong class="text-white">Python (Pandas, Scikit-Learn)</strong>, <strong class="text-white">Microsoft Excel (Pivot Table & rumus lanjutan)</strong>, serta <strong class="text-white">SQL</strong> untuk membersihkan data mentah dan menemukan pola yang dapat ditindaklanjuti.
-                        </p>
-
-                        <!-- Badge Sertifikasi & Pelatihan -->
-                        <div class="pt-4 border-t border-slate-800">
-                            <h3 class="text-xs font-mono uppercase tracking-wider text-cyan-400 mb-3">Pelatihan & Sertifikasi</h3>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 flex items-start gap-3">
-                                    <i class="fas fa-certificate text-emerald-400 mt-1"></i>
-                                    <div>
-                                        <p class="text-sm font-semibold text-white">Fullstack Data Analyst Training</p>
-                                        <p class="text-xs text-slate-400">Rocket Tutor</p>
-                                    </div>
-                                </div>
-                                <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 flex items-start gap-3">
-                                    <i class="fas fa-award text-cyan-400 mt-1"></i>
-                                    <div>
-                                        <p class="text-sm font-semibold text-white">The Freelance Starter Program</p>
-                                        <p class="text-xs text-slate-400">Professional Readiness</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pendidikan & Highlight -->
-                    <div class="lg:col-span-5 space-y-4">
-                        <div class="glass-card rounded-2xl p-6">
-                            <div class="flex items-center gap-3 mb-4">
-                                <div class="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center">
-                                    <i class="fas fa-graduation-cap text-lg"></i>
-                                </div>
-                                <h3 class="text-lg font-bold text-white">Riwayat Pendidikan</h3>
-                            </div>
-
-                            <div class="space-y-4">
-                                <div class="relative pl-4 border-l-2 border-cyan-500">
-                                    <span class="text-xs font-mono text-cyan-400">Saat Ini • Kelas 04TPLE005</span>
-                                    <h4 class="text-base font-bold text-white">Universitas Pamulang (UNPAM)</h4>
-                                    <p class="text-sm text-slate-400">S1 Teknik Informatika</p>
-                                </div>
-
-                                <div class="relative pl-4 border-l-2 border-slate-700">
-                                    <span class="text-xs font-mono text-slate-400">Lulusan</span>
-                                    <h4 class="text-base font-bold text-slate-200">SMAN 4 Tangerang</h4>
-                                    <p class="text-sm text-slate-400">Jurusan Ilmu Pengetahuan Alam (IPA)</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Mini Statistik -->
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="glass-card rounded-2xl p-4 text-center">
-                                <span class="text-2xl font-bold text-cyan-400 font-mono">6+</span>
-                                <p class="text-xs text-slate-400 mt-1">Proyek Analisis & Otomasi</p>
-                            </div>
-                            <div class="glass-card rounded-2xl p-4 text-center">
-                                <span class="text-2xl font-bold text-emerald-400 font-mono">500+</span>
-                                <p class="text-xs text-slate-400 mt-1">Porsi B2B Terkelola/Periode</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= PENGALAMAN (EXPERIENCE TIMELINE) ================= -->
-        <section id="pengalaman" class="py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-            <div class="reveal">
-                <div class="flex items-center space-x-3 mb-4">
-                    <span class="h-px w-8 bg-emerald-400"></span>
-                    <span class="text-emerald-400 font-mono text-sm uppercase tracking-wider">02. Pengalaman Kerja & Organisasi</span>
-                </div>
-                <h2 class="text-3xl sm:text-4xl font-bold text-slate-100 mb-10">
-                    Rekam Jejak <span class="text-gradient">Operasional & Logistik</span>
-                </h2>
-
-                <div class="relative border-l-2 border-slate-800 ml-3 sm:ml-6 space-y-10">
-                    
-                    <!-- Pengalaman 1: PT Mumtaz Catering -->
-                    <div class="relative pl-8 sm:pl-10">
-                        <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-cyan-400 ring-4 ring-slate-900"></span>
-                        <div class="glass-card rounded-2xl p-6 sm:p-7">
-                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
-                                <div>
-                                    <h3 class="text-xl font-bold text-white">Operational Staff</h3>
-                                    <p class="text-cyan-400 font-semibold text-sm">PT Mumtaz Catering</p>
-                                </div>
-                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-mono bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 w-fit">
-                                    Juli 2024 – Sekarang
-                                </span>
-                            </div>
-
-                            <ul class="space-y-2.5 text-slate-300 text-sm leading-relaxed list-disc list-inside">
-                                <li>Mengelola operasional katering harian secara menyeluruh, termasuk pencatatan dan rekapitulasi distribusi ratusan porsi makan karyawan per periode (seperti rekap <strong class="text-white">516 porsi makan karyawan</strong> untuk klien korporat <strong class="text-cyan-300">Pakons Prime Hotel</strong> pada shift Lunch, Dinner, dan Supper).</li>
-                                <li>Memantau level stok dan inventaris bahan baku secara berkala guna menjaga efisiensi operasional dan meminimalkan pemborosan.</li>
-                                <li>Berkoordinasi aktif lintas divisi (dapur, pengemasan, dan pengiriman) untuk memastikan ketepatan waktu distribusi sesuai jadwal klien.</li>
-                                <li>Menangani serta menyelesaikan kendala operasional lapangan dan keluhan pelanggan secara cepat dan solutif.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Pengalaman 2: Event Konser Bhineka -->
-                    <div class="relative pl-8 sm:pl-10">
-                        <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-emerald-400 ring-4 ring-slate-900"></span>
-                        <div class="glass-card rounded-2xl p-6 sm:p-7">
-                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
-                                <div>
-                                    <h3 class="text-xl font-bold text-white">Volunteer — Logistics Division</h3>
-                                    <p class="text-emerald-400 font-semibold text-sm">Event Konser Bhineka</p>
-                                </div>
-                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 w-fit">
-                                    Desember 2023
-                                </span>
-                            </div>
-
-                            <ul class="space-y-2.5 text-slate-300 text-sm leading-relaxed list-disc list-inside">
-                                <li>Memeriksa, memverifikasi, dan mendata inventaris kebutuhan operasional dari setiap divisi kepanitiaan sebelum dan selama acara berlangsung.</li>
-                                <li>Mengelola alur distribusi perlengkapan acara agar tersedia tepat waktu di setiap titik lokasi kegiatan.</li>
-                                <li>Berkoordinasi langsung dengan panitia inti dan pihak vendor eksternal untuk kelancaran suplai logistik.</li>
-                                <li>Menyusun laporan terstruktur mengenai penggunaan serta pengembalian barang inventaris pasca-acara.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= PROYEK & STUDI KASUS DATA ANALYSIS ================= -->
-        <section id="proyek" class="py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-            <div class="reveal">
-                <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-10 gap-6">
-                    <div>
-                        <div class="flex items-center space-x-3 mb-4">
-                            <span class="h-px w-8 bg-indigo-400"></span>
-                            <span class="text-indigo-400 font-mono text-sm uppercase tracking-wider">03. Portofolio & Studi Kasus</span>
-                        </div>
-                        <h2 class="text-3xl sm:text-4xl font-bold text-slate-100">
-                            Proyek <span class="text-gradient">Data Analysis & Otomasi</span>
-                        </h2>
-                        <p class="text-slate-400 text-sm mt-2 max-w-2xl">
-                            Kumpulan studi kasus pengolahan data nyata, tugas Data Mining, pembersihan data Excel, hingga skrip otomasi Python yang telah saya kerjakan.
+                        <h3 class="font-serif text-xl sm:text-2xl font-semibold text-ink dark:text-nightInk">
+                            Residential Property Data Cleansing &amp; EDA
+                        </h3>
+                        <p class="text-sm sm:text-base text-inkMuted dark:text-nightMuted leading-relaxed max-w-3xl">
+                            Analisis dataset properti pada mata kuliah Data Mining menggunakan Python dan Pandas untuk mendeteksi nilai hilang tidak standar (seperti <code class="font-mono text-xs px-1 py-0.5 rounded bg-paperAlt dark:bg-night">na</code>, <code class="font-mono text-xs px-1 py-0.5 rounded bg-paperAlt dark:bg-night">--</code>), melakukan imputasi numerik dan kategorikal, serta memvalidasi tipe data sebelum eksplorasi pola hunian.
                         </p>
                     </div>
 
-                    <!-- Filter Kategori Proyek -->
-                    <div class="flex flex-wrap gap-2" id="project-filters">
-                        <button class="filter-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-cyan-500 text-slate-950 transition-all" data-filter="all">
-                            Semua (6)
-                        </button>
-                        <button class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold glass text-slate-300 hover:text-white transition-all" data-filter="python-dm">
-                            Python & Data Mining
-                        </button>
-                        <button class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold glass text-slate-300 hover:text-white transition-all" data-filter="excel-ba">
-                            Excel & Business Analytics
-                        </button>
-                        <button class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold glass text-slate-300 hover:text-white transition-all" data-filter="automation">
-                            Automation
-                        </button>
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-zinc-100 dark:border-zinc-800">
+                        <div class="flex flex-wrap gap-2 font-mono text-xs text-inkMuted dark:text-nightMuted">
+                            <span class="px-2.5 py-1 rounded bg-paperAlt dark:bg-night">Python</span>
+                            <span class="px-2.5 py-1 rounded bg-paperAlt dark:bg-night">Pandas</span>
+                            <span class="px-2.5 py-1 rounded bg-paperAlt dark:bg-night">Matplotlib &amp; Seaborn</span>
+                        </div>
+                        <div class="flex items-center gap-2.5">
+                            <button type="button" onclick="openStudyCaseModal(0, this)" class="min-h-[44px] px-4 py-2 rounded-md bg-pine dark:bg-tealBright text-white dark:text-night text-sm font-semibold hover:opacity-90 transition-opacity">
+                                Baca Detail Studi Kasus
+                            </button>
+                            <a href="https://github.com/shafwanmumtaz/residential-property-eda" target="_blank" rel="noopener noreferrer" class="min-h-[44px] px-4 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 text-ink dark:text-nightInk hover:border-pine dark:hover:border-tealBright text-sm font-medium flex items-center justify-center transition-colors">
+                                Repo GitHub
+                            </a>
+                        </div>
                     </div>
-                </div>
+                </article>
 
-                <!-- Grid Kartu Proyek -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="projects-grid">
-                    
-                    <!-- Proyek 1: Exploratory Data Analysis & Data Mining -->
-                    <article class="project-card glass-card rounded-2xl p-6 flex flex-col justify-between" data-category="python-dm">
-                        <div>
-                            <div class="flex justify-between items-start mb-4">
-                                <div class="p-3 rounded-xl bg-cyan-500/10 text-cyan-400">
-                                    <i class="fas fa-search-plus text-xl"></i>
-                                </div>
-                                <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-slate-800/90 text-slate-400 border border-slate-700">
-                                    Jupyter Notebook
-                                </span>
-                            </div>
-
-                            <h3 class="text-lg font-bold text-white mb-2 hover:text-cyan-400 transition-colors">
-                                Exploratory Data Analysis & Data Mining Properti
-                            </h3>
-                            <p class="text-slate-400 text-sm leading-relaxed mb-4">
-                                Analisis dataset properti (<code class="text-cyan-300 text-xs">file csv shafwan.csv</code>) menggunakan Python & Pandas pada mata kuliah Data Mining untuk membersihkan anomali dan mengeksplorasi pola hunian.
-                            </p>
+                <!-- Proyek 2 -->
+                <article class="project-card rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-nightAlt p-6 flex flex-col justify-between gap-5 hover:border-pine dark:hover:border-tealBright transition-colors" data-category="python-dm">
+                    <div class="space-y-2.5">
+                        <div class="flex items-center justify-between gap-2 font-mono text-xs text-inkMuted dark:text-nightMuted">
+                            <span>Python &amp; Data Mining</span>
+                            <span>Kaggle Dataset</span>
                         </div>
-
-                        <div>
-                            <div class="flex flex-wrap gap-1.5 mb-5 font-mono text-xs">
-                                <span class="px-2.5 py-1 rounded-md bg-slate-800 text-cyan-400">Python</span>
-                                <span class="px-2.5 py-1 rounded-md bg-slate-800 text-emerald-400">Pandas</span>
-                                <span class="px-2.5 py-1 rounded-md bg-slate-800 text-indigo-400">Data Cleaning</span>
-                            </div>
-                            <div class="flex gap-2">
-                                <button onclick="openStudyCaseModal(0)" class="flex-1 py-2.5 rounded-xl bg-slate-800/80 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 text-sm font-semibold transition-all flex items-center justify-center gap-2">
-                                    <span>Studi Kasus</span>
-                                    <i class="fas fa-arrow-right text-xs"></i>
-                                </button>
-                                <a href="https://github.com/shafwanmumtaz/residential-property-eda" target="_blank" rel="noopener noreferrer" aria-label="Repository GitHub Residential Property EDA" class="px-3.5 py-2.5 rounded-xl glass hover:bg-slate-800 text-slate-300 hover:text-cyan-400 border border-slate-700 transition-all flex items-center justify-center" title="Lihat di GitHub">
-                                    <i class="fab fa-github text-lg"></i>
-                                </a>
-                            </div>
+                        <h3 class="text-lg font-semibold text-ink dark:text-nightInk">
+                            Netflix Shows &amp; Movies Exploratory Analysis
+                        </h3>
+                        <p class="text-sm text-inkMuted dark:text-nightMuted leading-relaxed">
+                            Eksplorasi katalog film dan serial TV global Netflix untuk memetakan tren rilis tahunan, negara produsen utama, dan segmentasi rating usia penonton.
+                        </p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex flex-wrap gap-1.5 font-mono text-xs text-inkMuted dark:text-nightMuted">
+                            <span class="px-2 py-0.5 rounded bg-paperAlt dark:bg-night">Python</span>
+                            <span class="px-2 py-0.5 rounded bg-paperAlt dark:bg-night">Seaborn</span>
+                            <span class="px-2 py-0.5 rounded bg-paperAlt dark:bg-night">EDA</span>
                         </div>
-                    </article>
-
-                    <!-- Proyek 2: Netflix Shows & Movies Exploratory Analysis -->
-                    <article class="project-card glass-card rounded-2xl p-6 flex flex-col justify-between" data-category="python-dm">
-                        <div>
-                            <div class="flex justify-between items-start mb-4">
-                                <div class="p-3 rounded-xl bg-indigo-500/10 text-indigo-400">
-                                    <i class="fas fa-film text-xl"></i>
-                                </div>
-                                <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-slate-800/90 text-slate-400 border border-slate-700">
-                                    Kaggle Dataset EDA
-                                </span>
-                            </div>
-
-                            <h3 class="text-lg font-bold text-white mb-2 hover:text-indigo-400 transition-colors">
-                                Netflix Shows & Movies Exploratory Analysis
-                            </h3>
-                            <p class="text-slate-400 text-sm leading-relaxed mb-4">
-                                Eksplorasi katalog film dan serial TV global Netflix dari Kaggle untuk memetakan tren pertumbuhan rilis tahunan, distribusi negara produsen, serta segmentasi rating penonton.
-                            </p>
+                        <div class="flex gap-2">
+                            <button type="button" onclick="openStudyCaseModal(1, this)" class="flex-1 min-h-[44px] px-3 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 hover:border-pine dark:hover:border-tealBright text-ink dark:text-nightInk text-sm font-semibold transition-colors">
+                                Baca Detail
+                            </button>
+                            <a href="https://github.com/shafwanmumtaz/netflix-shows-eda" target="_blank" rel="noopener noreferrer" aria-label="Buka repositori Netflix Shows EDA di GitHub" class="min-h-[44px] px-4 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 hover:border-pine dark:hover:border-tealBright text-inkMuted dark:text-nightMuted hover:text-ink dark:hover:text-nightInk text-sm font-medium flex items-center justify-center transition-colors">
+                                GitHub
+                            </a>
                         </div>
+                    </div>
+                </article>
 
-                        <div>
-                            <div class="flex flex-wrap gap-1.5 mb-5 font-mono text-xs">
-                                <span class="px-2.5 py-1 rounded-md bg-slate-800 text-indigo-400">Python</span>
-                                <span class="px-2.5 py-1 rounded-md bg-slate-800 text-cyan-400">Seaborn</span>
-                                <span class="px-2.5 py-1 rounded-md bg-slate-800 text-emerald-400">EDA</span>
-                            </div>
-                            <div class="flex gap-2">
-                                <button onclick="openStudyCaseModal(1)" class="flex-1 py-2.5 rounded-xl bg-slate-800/80 hover:bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 text-sm font-semibold transition-all flex items-center justify-center gap-2">
-                                    <span>Studi Kasus</span>
-                                    <i class="fas fa-arrow-right text-xs"></i>
-                                </button>
-                                <a href="https://github.com/shafwanmumtaz/netflix-shows-eda" target="_blank" rel="noopener noreferrer" aria-label="Repository GitHub Netflix Shows EDA" class="px-3.5 py-2.5 rounded-xl glass hover:bg-slate-800 text-slate-300 hover:text-indigo-400 border border-slate-700 transition-all flex items-center justify-center" title="Lihat di GitHub">
-                                    <i class="fab fa-github text-lg"></i>
-                                </a>
-                            </div>
+                <!-- Proyek 3 -->
+                <article class="project-card rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-nightAlt p-6 flex flex-col justify-between gap-5 hover:border-pine dark:hover:border-tealBright transition-colors" data-category="excel-ba">
+                    <div class="space-y-2.5">
+                        <div class="flex items-center justify-between gap-2 font-mono text-xs text-inkMuted dark:text-nightMuted">
+                            <span>Excel &amp; Analytics</span>
+                            <span>PivotTable_Sales_Data.xlsx</span>
                         </div>
-                    </article>
-
-                    <!-- Proyek 3: Corporate Sales Pivot & Department Performance Analysis -->
-                    <article class="project-card glass-card rounded-2xl p-6 flex flex-col justify-between" data-category="excel-ba">
-                        <div>
-                            <div class="flex justify-between items-start mb-4">
-                                <div class="p-3 rounded-xl bg-amber-500/10 text-amber-400">
-                                    <i class="fas fa-table text-xl"></i>
-                                </div>
-                                <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-slate-800/90 text-slate-400 border border-slate-700">
-                                    PivotTable_Sales_Data.xlsx
-                                </span>
-                            </div>
-
-                            <h3 class="text-lg font-bold text-white mb-2 hover:text-amber-400 transition-colors">
-                                Corporate Sales Pivot & Department Performance Analysis
-                            </h3>
-                            <p class="text-slate-400 text-sm leading-relaxed mb-4">
-                                Evaluasi transaksi pengadaan perangkat IT lintas 5 departemen sepanjang 2024 menggunakan Pivot Table dinamis untuk memetakan performa produk dan anggaran.
-                            </p>
+                        <h3 class="text-lg font-semibold text-ink dark:text-nightInk">
+                            Corporate Sales Pivot &amp; Department Performance
+                        </h3>
+                        <p class="text-sm text-inkMuted dark:text-nightMuted leading-relaxed">
+                            Evaluasi transaksi pengadaan perangkat IT lintas 5 departemen sepanjang 2024 menggunakan Pivot Table untuk memetakan kebutuhan perangkat dan anggaran.
+                        </p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex flex-wrap gap-1.5 font-mono text-xs text-inkMuted dark:text-nightMuted">
+                            <span class="px-2 py-0.5 rounded bg-paperAlt dark:bg-night">Pivot Table</span>
+                            <span class="px-2 py-0.5 rounded bg-paperAlt dark:bg-night">Microsoft Excel</span>
                         </div>
-
-                        <div>
-                            <div class="flex flex-wrap gap-1.5 mb-5 font-mono text-xs">
-                                <span class="px-2.5 py-1 rounded-md bg-slate-800 text-amber-400">Pivot Table</span>
-                                <span class="px-2.5 py-1 rounded-md bg-slate-800 text-emerald-400">Business Analytics</span>
-                                <span class="px-2.5 py-1 rounded-md bg-slate-800 text-cyan-400">Reporting</span>
-                            </div>
-                            <div class="flex gap-2">
-                                <button onclick="openStudyCaseModal(2)" class="flex-1 py-2.5 rounded-xl bg-slate-800/80 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 text-sm font-semibold transition-all flex items-center justify-center gap-2">
-                                    <span>Studi Kasus</span>
-                                    <i class="fas fa-arrow-right text-xs"></i>
-                                </button>
-                                <a href="https://github.com/shafwanmumtaz/sales-pivot-analytics" target="_blank" rel="noopener noreferrer" aria-label="Repository GitHub Sales Pivot Analytics" class="px-3.5 py-2.5 rounded-xl glass hover:bg-slate-800 text-slate-300 hover:text-amber-400 border border-slate-700 transition-all flex items-center justify-center" title="Lihat di GitHub">
-                                    <i class="fab fa-github text-lg"></i>
-                                </a>
-                            </div>
+                        <div class="flex gap-2">
+                            <button type="button" onclick="openStudyCaseModal(2, this)" class="flex-1 min-h-[44px] px-3 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 hover:border-pine dark:hover:border-tealBright text-ink dark:text-nightInk text-sm font-semibold transition-colors">
+                                Baca Detail
+                            </button>
+                            <a href="https://github.com/shafwanmumtaz/sales-pivot-analytics" target="_blank" rel="noopener noreferrer" aria-label="Buka repositori Corporate Sales Pivot di GitHub" class="min-h-[44px] px-4 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 hover:border-pine dark:hover:border-tealBright text-inkMuted dark:text-nightMuted hover:text-ink dark:hover:text-nightInk text-sm font-medium flex items-center justify-center transition-colors">
+                                GitHub
+                            </a>
                         </div>
-                    </article>
+                    </div>
+                </article>
 
-                    <!-- Proyek 4: Employee Sales Data Cleaning & Standardization -->
-                    <article class="project-card glass-card rounded-2xl p-6 flex flex-col justify-between" data-category="excel-ba">
-                        <div>
-                            <div class="flex justify-between items-start mb-4">
-                                <div class="p-3 rounded-xl bg-emerald-500/10 text-emerald-400">
-                                    <i class="fas fa-file-excel text-xl"></i>
-                                </div>
-                                <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-slate-800/90 text-slate-400 border border-slate-700">
-                                    PPT 1.xlsx
-                                </span>
-                            </div>
-
-                            <h3 class="text-lg font-bold text-white mb-2 hover:text-emerald-400 transition-colors">
-                                Employee Sales Data Cleaning & Standardization
-                            </h3>
-                            <p class="text-slate-400 text-sm leading-relaxed mb-4">
-                                Pembersihan dan standarisasi dataset penjualan kuartalan (Q1–Q4) menggunakan fungsi lanjutan Microsoft Excel untuk mengatasi duplikasi, spasi liar, dan inkonsistensi format.
-                            </p>
+                <!-- Proyek 4 -->
+                <article class="project-card rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-nightAlt p-6 flex flex-col justify-between gap-5 hover:border-pine dark:hover:border-tealBright transition-colors" data-category="excel-ba">
+                    <div class="space-y-2.5">
+                        <div class="flex items-center justify-between gap-2 font-mono text-xs text-inkMuted dark:text-nightMuted">
+                            <span>Excel &amp; Analytics</span>
+                            <span>PPT 1.xlsx</span>
                         </div>
-
-                        <div>
-                            <div class="flex flex-wrap gap-1.5 mb-5 font-mono text-xs">
-                                <span class="px-2.5 py-1 rounded-md bg-slate-800 text-emerald-400">Excel Formulas</span>
-                                <span class="px-2.5 py-1 rounded-md bg-slate-800 text-cyan-400">TRIM/PROPER</span>
-                                <span class="px-2.5 py-1 rounded-md bg-slate-800 text-amber-400">COUNTIF</span>
-                            </div>
-                            <div class="flex gap-2">
-                                <button onclick="openStudyCaseModal(3)" class="flex-1 py-2.5 rounded-xl bg-slate-800/80 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-sm font-semibold transition-all flex items-center justify-center gap-2">
-                                    <span>Studi Kasus</span>
-                                    <i class="fas fa-arrow-right text-xs"></i>
-                                </button>
-                                <a href="https://github.com/shafwanmumtaz/excel-data-cleaning" target="_blank" rel="noopener noreferrer" aria-label="Repository GitHub Excel Data Cleaning" class="px-3.5 py-2.5 rounded-xl glass hover:bg-slate-800 text-slate-300 hover:text-emerald-400 border border-slate-700 transition-all flex items-center justify-center" title="Lihat di GitHub">
-                                    <i class="fab fa-github text-lg"></i>
-                                </a>
-                            </div>
+                        <h3 class="text-lg font-semibold text-ink dark:text-nightInk">
+                            Employee Sales Data Cleaning (Q1-Q4)
+                        </h3>
+                        <p class="text-sm text-inkMuted dark:text-nightMuted leading-relaxed">
+                            Pembersihan dan standarisasi data penjualan kuartalan menggunakan TRIM, PROPER, TEXT, IF, dan COUNTIF untuk menghilangkan duplikasi dan inkonsistensi format.
+                        </p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex flex-wrap gap-1.5 font-mono text-xs text-inkMuted dark:text-nightMuted">
+                            <span class="px-2 py-0.5 rounded bg-paperAlt dark:bg-night">Excel Formulas</span>
+                            <span class="px-2 py-0.5 rounded bg-paperAlt dark:bg-night">TRIM / PROPER</span>
+                            <span class="px-2 py-0.5 rounded bg-paperAlt dark:bg-night">COUNTIF</span>
                         </div>
-                    </article>
-
-                    <!-- Proyek 5: Automated File Organizer CLI Tool (rapikan.py) -->
-                    <article class="project-card glass-card rounded-2xl p-6 flex flex-col justify-between" data-category="automation">
-                        <div>
-                            <div class="flex justify-between items-start mb-4">
-                                <div class="p-3 rounded-xl bg-teal-500/10 text-teal-400">
-                                    <i class="fas fa-folder-tree text-xl"></i>
-                                </div>
-                                <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-slate-800/90 text-slate-400 border border-slate-700">
-                                    rapikan.py
-                                </span>
-                            </div>
-
-                            <h3 class="text-lg font-bold text-white mb-2 hover:text-teal-400 transition-colors">
-                                Automated File Organizer CLI Tool (rapikan.py)
-                            </h3>
-                            <p class="text-slate-400 text-sm leading-relaxed mb-4">
-                                Skrip otomasi Python (<code class="text-teal-300 text-xs">rapikan.py</code>) untuk memindai direktori kerja dan mengelompokkan file dataset, dokumen, serta media ke subfolder kategori.
-                            </p>
+                        <div class="flex gap-2">
+                            <button type="button" onclick="openStudyCaseModal(3, this)" class="flex-1 min-h-[44px] px-3 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 hover:border-pine dark:hover:border-tealBright text-ink dark:text-nightInk text-sm font-semibold transition-colors">
+                                Baca Detail
+                            </button>
+                            <a href="https://github.com/shafwanmumtaz/excel-data-cleaning" target="_blank" rel="noopener noreferrer" aria-label="Buka repositori Excel Data Cleaning di GitHub" class="min-h-[44px] px-4 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 hover:border-pine dark:hover:border-tealBright text-inkMuted dark:text-nightMuted hover:text-ink dark:hover:text-nightInk text-sm font-medium flex items-center justify-center transition-colors">
+                                GitHub
+                            </a>
                         </div>
+                    </div>
+                </article>
 
-                        <div>
-                            <div class="flex flex-wrap gap-1.5 mb-5 font-mono text-xs">
-                                <span class="px-2.5 py-1 rounded-md bg-slate-800 text-teal-400">Python OS/Shutil</span>
-                                <span class="px-2.5 py-1 rounded-md bg-slate-800 text-cyan-400">Automation</span>
-                                <span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300">CLI Tool</span>
-                            </div>
-                            <div class="flex gap-2">
-                                <button onclick="openStudyCaseModal(4)" class="flex-1 py-2.5 rounded-xl bg-slate-800/80 hover:bg-teal-500/20 text-teal-400 border border-teal-500/30 text-sm font-semibold transition-all flex items-center justify-center gap-2">
-                                    <span>Studi Kasus</span>
-                                    <i class="fas fa-arrow-right text-xs"></i>
-                                </button>
-                                <a href="https://github.com/shafwanmumtaz/python-automation-scripts" target="_blank" rel="noopener noreferrer" aria-label="Repository GitHub Python Automation Scripts" class="px-3.5 py-2.5 rounded-xl glass hover:bg-slate-800 text-slate-300 hover:text-teal-400 border border-slate-700 transition-all flex items-center justify-center" title="Lihat di GitHub">
-                                    <i class="fab fa-github text-lg"></i>
-                                </a>
-                            </div>
+                <!-- Proyek 5 -->
+                <article class="project-card rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-nightAlt p-6 flex flex-col justify-between gap-5 hover:border-pine dark:hover:border-tealBright transition-colors" data-category="automation">
+                    <div class="space-y-2.5">
+                        <div class="flex items-center justify-between gap-2 font-mono text-xs text-inkMuted dark:text-nightMuted">
+                            <span>Automation</span>
+                            <span>rapikan.py</span>
                         </div>
-                    </article>
-
-                    <!-- Proyek 6: Catering & Logistics Portion Reporting System -->
-                    <article class="project-card glass-card rounded-2xl p-6 flex flex-col justify-between" data-category="excel-ba">
-                        <div>
-                            <div class="flex justify-between items-start mb-4">
-                                <div class="p-3 rounded-xl bg-rose-500/10 text-rose-400">
-                                    <i class="fas fa-utensils text-xl"></i>
-                                </div>
-                                <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-slate-800/90 text-slate-400 border border-slate-700">
-                                    PT Mumtaz Catering
-                                </span>
-                            </div>
-
-                            <h3 class="text-lg font-bold text-white mb-2 hover:text-rose-400 transition-colors">
-                                Catering & Logistics Portion Reporting System
-                            </h3>
-                            <p class="text-slate-400 text-sm leading-relaxed mb-4">
-                                Digitalisasi pencatatan distribusi harian (Lunch, Dinner, Supper) dan pelaporan volume pesanan klien B2B seperti rekap 516 porsi Pakons Prime Hotel.
-                            </p>
+                        <h3 class="text-lg font-semibold text-ink dark:text-nightInk">
+                            Automated File Organizer CLI Tool
+                        </h3>
+                        <p class="text-sm text-inkMuted dark:text-nightMuted leading-relaxed">
+                            Skrip CLI Python (<code class="font-mono text-xs px-1 py-0.5 rounded bg-paperAlt dark:bg-night">rapikan.py</code>) dengan modul OS dan Shutil untuk memindai direktori kerja dan mengelompokkan file dataset, dokumen, serta media otomatis.
+                        </p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex flex-wrap gap-1.5 font-mono text-xs text-inkMuted dark:text-nightMuted">
+                            <span class="px-2 py-0.5 rounded bg-paperAlt dark:bg-night">Python</span>
+                            <span class="px-2 py-0.5 rounded bg-paperAlt dark:bg-night">os &amp; shutil</span>
+                            <span class="px-2 py-0.5 rounded bg-paperAlt dark:bg-night">CLI Tool</span>
                         </div>
-
-                        <div>
-                            <div class="flex flex-wrap gap-1.5 mb-5 font-mono text-xs">
-                                <span class="px-2.5 py-1 rounded-md bg-slate-800 text-rose-400">Operational Data</span>
-                                <span class="px-2.5 py-1 rounded-md bg-slate-800 text-emerald-400">Excel</span>
-                                <span class="px-2.5 py-1 rounded-md bg-slate-800 text-cyan-400">B2B Reporting</span>
-                            </div>
-                            <div class="flex gap-2">
-                                <button onclick="openStudyCaseModal(5)" class="flex-1 py-2.5 rounded-xl bg-slate-800/80 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 text-sm font-semibold transition-all flex items-center justify-center gap-2">
-                                    <span>Studi Kasus</span>
-                                    <i class="fas fa-arrow-right text-xs"></i>
-                                </button>
-                                <a href="https://github.com/shafwanmumtaz/catering-operations-report" target="_blank" rel="noopener noreferrer" aria-label="Repository GitHub Catering Operations Report" class="px-3.5 py-2.5 rounded-xl glass hover:bg-slate-800 text-slate-300 hover:text-rose-400 border border-slate-700 transition-all flex items-center justify-center" title="Lihat di GitHub">
-                                    <i class="fab fa-github text-lg"></i>
-                                </a>
-                            </div>
+                        <div class="flex gap-2">
+                            <button type="button" onclick="openStudyCaseModal(4, this)" class="flex-1 min-h-[44px] px-3 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 hover:border-pine dark:hover:border-tealBright text-ink dark:text-nightInk text-sm font-semibold transition-colors">
+                                Baca Detail
+                            </button>
+                            <a href="https://github.com/shafwanmumtaz/python-automation-scripts" target="_blank" rel="noopener noreferrer" aria-label="Buka repositori Python Automation Scripts di GitHub" class="min-h-[44px] px-4 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 hover:border-pine dark:hover:border-tealBright text-inkMuted dark:text-nightMuted hover:text-ink dark:hover:text-nightInk text-sm font-medium flex items-center justify-center transition-colors">
+                                GitHub
+                            </a>
                         </div>
-                    </article>
+                    </div>
+                </article>
 
-                </div>
+                <!-- Proyek 6 -->
+                <article class="project-card md:col-span-2 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-nightAlt p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-5 hover:border-pine dark:hover:border-tealBright transition-colors" data-category="excel-ba">
+                    <div class="space-y-2 max-w-2xl">
+                        <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-inkMuted dark:text-nightMuted">
+                            <span>Excel &amp; Analytics</span>
+                            <span>PT Mumtaz Catering</span>
+                        </div>
+                        <h3 class="text-lg font-semibold text-ink dark:text-nightInk">
+                            Catering &amp; Logistics Portion Reporting System
+                        </h3>
+                        <p class="text-sm text-inkMuted dark:text-nightMuted leading-relaxed">
+                            Digitalisasi pencatatan distribusi harian (Lunch, Dinner, Supper) dan pelaporan volume pesanan klien B2B, termasuk rekap 516 porsi Pakons Prime Hotel.
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-2 shrink-0">
+                        <button type="button" onclick="openStudyCaseModal(5, this)" class="min-h-[44px] px-4 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 hover:border-pine dark:hover:border-tealBright text-ink dark:text-nightInk text-sm font-semibold transition-colors">
+                            Baca Detail
+                        </button>
+                        <a href="https://github.com/shafwanmumtaz/catering-operations-report" target="_blank" rel="noopener noreferrer" aria-label="Buka repositori Catering Operations Report di GitHub" class="min-h-[44px] px-4 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 hover:border-pine dark:hover:border-tealBright text-inkMuted dark:text-nightMuted hover:text-ink dark:hover:text-nightInk text-sm font-medium flex items-center justify-center transition-colors">
+                            GitHub
+                        </a>
+                    </div>
+                </article>
+
             </div>
         </section>
 
-        <!-- ================= KEAHLIAN (SKILLS) ================= -->
-        <section id="keahlian" class="py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-            <div class="reveal">
-                <div class="flex items-center space-x-3 mb-4">
-                    <span class="h-px w-8 bg-cyan-400"></span>
-                    <span class="text-cyan-400 font-mono text-sm uppercase tracking-wider">04. Kompetensi Teknis & Operasional</span>
+        <!-- ================= KEAHLIAN (TANPA PERSENTASE BUATAN) ================= -->
+        <section id="keahlian" class="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto border-b border-zinc-200 dark:border-zinc-800">
+            <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-ink dark:text-nightInk mb-3">
+                Keahlian &amp; Alat Kerja
+            </h2>
+            <p class="text-sm text-inkMuted dark:text-nightMuted mb-8 max-w-2xl">
+                Alat dan metode yang saya gunakan sehari-hari dalam pengerjaan studi kasus data maupun administrasi operasional.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="space-y-3">
+                    <h3 class="font-mono text-xs uppercase tracking-wider text-pine dark:text-tealBright pb-2 border-b border-zinc-200 dark:border-zinc-800">
+                        Python &amp; Data Mining
+                    </h3>
+                    <ul class="space-y-2.5 text-sm text-inkMuted dark:text-nightMuted">
+                        <li><strong class="font-semibold text-ink dark:text-nightInk">Pandas &amp; NumPy:</strong> pembersihan missing value, konversi tipe data, dan agregasi.</li>
+                        <li><strong class="font-semibold text-ink dark:text-nightInk">Matplotlib &amp; Seaborn:</strong> visualisasi distribusi dan tren eksploratif.</li>
+                        <li><strong class="font-semibold text-ink dark:text-nightInk">Scikit-learn &amp; CLI:</strong> dasar klasifikasi/klastering serta otomasi file (<code class="font-mono text-xs">os</code>, <code class="font-mono text-xs">shutil</code>).</li>
+                    </ul>
                 </div>
-                <h2 class="text-3xl sm:text-4xl font-bold text-slate-100 mb-10">
-                    Keahlian & <span class="text-gradient">Tech Stack</span>
-                </h2>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="skills-container">
-                    <!-- Kategori 1: Python & Data Science -->
-                    <div class="glass-card rounded-2xl p-6">
-                        <div class="flex items-center gap-3 mb-6">
-                            <div class="p-3 rounded-xl bg-cyan-500/10 text-cyan-400">
-                                <i class="fab fa-python text-xl"></i>
-                            </div>
-                            <h3 class="text-lg font-bold text-white">Python & Data Mining</h3>
-                        </div>
+                <div class="space-y-3">
+                    <h3 class="font-mono text-xs uppercase tracking-wider text-pine dark:text-tealBright pb-2 border-b border-zinc-200 dark:border-zinc-800">
+                        Excel &amp; SQL
+                    </h3>
+                    <ul class="space-y-2.5 text-sm text-inkMuted dark:text-nightMuted">
+                        <li><strong class="font-semibold text-ink dark:text-nightInk">Microsoft Excel:</strong> Pivot Table lintas departemen, standarisasi teks (<code class="font-mono text-xs">TRIM</code>, <code class="font-mono text-xs">PROPER</code>, <code class="font-mono text-xs">TEXT</code>), serta fungsi logika (<code class="font-mono text-xs">IF</code>, <code class="font-mono text-xs">COUNTIF</code>).</li>
+                        <li><strong class="font-semibold text-ink dark:text-nightInk">SQL:</strong> penulisan query seleksi, penggabungan tabel (JOIN), dan agregasi data.</li>
+                        <li><strong class="font-semibold text-ink dark:text-nightInk">Pelaporan:</strong> penyusunan rekap periodik yang siap diaudit.</li>
+                    </ul>
+                </div>
 
-                        <div class="space-y-4">
-                            <div>
-                                <div class="flex justify-between text-sm mb-1">
-                                    <span class="text-slate-300 font-medium">Pandas & NumPy (EDA & Cleaning)</span>
-                                    <span class="text-cyan-400 font-mono">88%</span>
-                                </div>
-                                <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
-                                    <div class="skill-bar bg-gradient-to-r from-cyan-500 to-emerald-400 h-2 rounded-full transition-all duration-1000" style="width: 0%" data-width="88%"></div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="flex justify-between text-sm mb-1">
-                                    <span class="text-slate-300 font-medium">Scikit-learn (Classification & Clustering)</span>
-                                    <span class="text-cyan-400 font-mono">82%</span>
-                                </div>
-                                <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
-                                    <div class="skill-bar bg-gradient-to-r from-cyan-500 to-emerald-400 h-2 rounded-full transition-all duration-1000" style="width: 0%" data-width="82%"></div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="flex justify-between text-sm mb-1">
-                                    <span class="text-slate-300 font-medium">Jupyter Notebook & Python Automation</span>
-                                    <span class="text-cyan-400 font-mono">90%</span>
-                                </div>
-                                <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
-                                    <div class="skill-bar bg-gradient-to-r from-cyan-500 to-emerald-400 h-2 rounded-full transition-all duration-1000" style="width: 0%" data-width="90%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Kategori 2: Microsoft Excel & SQL -->
-                    <div class="glass-card rounded-2xl p-6">
-                        <div class="flex items-center gap-3 mb-6">
-                            <div class="p-3 rounded-xl bg-emerald-500/10 text-emerald-400">
-                                <i class="fas fa-table text-xl"></i>
-                            </div>
-                            <h3 class="text-lg font-bold text-white">Excel, SQL & Visualisasi</h3>
-                        </div>
-
-                        <div class="space-y-4">
-                            <div>
-                                <div class="flex justify-between text-sm mb-1">
-                                    <span class="text-slate-300 font-medium">Excel (Pivot Table, Data Cleaning, Formulas)</span>
-                                    <span class="text-emerald-400 font-mono">92%</span>
-                                </div>
-                                <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
-                                    <div class="skill-bar bg-gradient-to-r from-emerald-500 to-cyan-400 h-2 rounded-full transition-all duration-1000" style="width: 0%" data-width="92%"></div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="flex justify-between text-sm mb-1">
-                                    <span class="text-slate-300 font-medium">SQL (Query, Joins, Aggregations)</span>
-                                    <span class="text-emerald-400 font-mono">85%</span>
-                                </div>
-                                <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
-                                    <div class="skill-bar bg-gradient-to-r from-emerald-500 to-cyan-400 h-2 rounded-full transition-all duration-1000" style="width: 0%" data-width="85%"></div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="flex justify-between text-sm mb-1">
-                                    <span class="text-slate-300 font-medium">Data Visualization & Reporting</span>
-                                    <span class="text-emerald-400 font-mono">86%</span>
-                                </div>
-                                <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
-                                    <div class="skill-bar bg-gradient-to-r from-emerald-500 to-cyan-400 h-2 rounded-full transition-all duration-1000" style="width: 0%" data-width="86%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Kategori 3: Operasional & Administrasi Logistik -->
-                    <div class="glass-card rounded-2xl p-6">
-                        <div class="flex items-center gap-3 mb-6">
-                            <div class="p-3 rounded-xl bg-indigo-500/10 text-indigo-400">
-                                <i class="fas fa-boxes text-xl"></i>
-                            </div>
-                            <h3 class="text-lg font-bold text-white">Operasional & Logistik</h3>
-                        </div>
-
-                        <div class="space-y-4">
-                            <div>
-                                <div class="flex justify-between text-sm mb-1">
-                                    <span class="text-slate-300 font-medium">Logistic & Inventory Administration</span>
-                                    <span class="text-indigo-400 font-mono">94%</span>
-                                </div>
-                                <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
-                                    <div class="skill-bar bg-gradient-to-r from-indigo-500 to-cyan-400 h-2 rounded-full transition-all duration-1000" style="width: 0%" data-width="94%"></div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="flex justify-between text-sm mb-1">
-                                    <span class="text-slate-300 font-medium">B2B Distribution Tracking & Audit</span>
-                                    <span class="text-indigo-400 font-mono">90%</span>
-                                </div>
-                                <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
-                                    <div class="skill-bar bg-gradient-to-r from-indigo-500 to-cyan-400 h-2 rounded-full transition-all duration-1000" style="width: 0%" data-width="90%"></div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="flex justify-between text-sm mb-1">
-                                    <span class="text-slate-300 font-medium">Cross-Division Coordination & Git</span>
-                                    <span class="text-indigo-400 font-mono">88%</span>
-                                </div>
-                                <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
-                                    <div class="skill-bar bg-gradient-to-r from-indigo-500 to-cyan-400 h-2 rounded-full transition-all duration-1000" style="width: 0%" data-width="88%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="space-y-3">
+                    <h3 class="font-mono text-xs uppercase tracking-wider text-pine dark:text-tealBright pb-2 border-b border-zinc-200 dark:border-zinc-800">
+                        Operasional &amp; Kolaborasi
+                    </h3>
+                    <ul class="space-y-2.5 text-sm text-inkMuted dark:text-nightMuted">
+                        <li><strong class="font-semibold text-ink dark:text-nightInk">Administrasi Logistik:</strong> pencatatan stok bahan baku dan audit distribusi B2B.</li>
+                        <li><strong class="font-semibold text-ink dark:text-nightInk">Koordinasi Lintas Divisi:</strong> sinkronisasi jadwal dapur, pengemasan, dan pengiriman.</li>
+                        <li><strong class="font-semibold text-ink dark:text-nightInk">Version Control:</strong> pengelolaan proyek dan dokumentasi dengan Git &amp; GitHub.</li>
+                    </ul>
                 </div>
             </div>
         </section>
 
         <!-- ================= KONTAK ================= -->
-        <section id="kontak" class="py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-            <div class="reveal glass-card rounded-3xl p-6 sm:p-10 md:p-12 relative">
-                <div class="text-center mb-10">
-                    <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono mb-4">
-                        <span>05. Kontak & Kolaborasi</span>
-                    </div>
-                    <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">
-                        Mari Terhubung & <span class="text-gradient">Berdiskusi Data</span>
-                    </h2>
-                    <p class="text-slate-400 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
-                        Saya terbuka untuk peluang magang, posisi Junior Data Analyst, maupun kolaborasi proyek pengolahan data. Silakan hubungi atau kunjungi profil GitHub saya melalui detail di bawah ini.
-                    </p>
-                </div>
+        <section id="kontak" class="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+            <div class="max-w-2xl mb-8">
+                <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-ink dark:text-nightInk mb-3">
+                    Kontak &amp; Kolaborasi
+                </h2>
+                <p class="text-sm sm:text-base text-inkMuted dark:text-nightMuted leading-relaxed">
+                    Terbuka untuk peluang magang, posisi Junior Data Analyst, atau diskusi proyek pengolahan data.
+                </p>
+            </div>
 
-                <!-- Grid Kartu Kontak Responsif (Anti Terpotong) -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 text-left">
-                    
-                    <!-- Kartu 1: Email -->
-                    <div class="p-4 sm:p-5 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-cyan-500/40 transition-all flex flex-col justify-between gap-4 min-w-0">
-                        <div class="flex items-start gap-3.5 min-w-0">
-                            <div class="w-11 h-11 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center shrink-0 mt-0.5">
-                                <i class="fas fa-envelope text-lg"></i>
-                            </div>
-                            <div class="min-w-0 flex-1">
-                                <span class="text-xs font-mono uppercase tracking-wider text-slate-400 block mb-1">Email Utama</span>
-                                <a href="mailto:shafwanmumtaz0@gmail.com" class="text-sm sm:text-base font-semibold text-white hover:text-cyan-400 transition-colors block break-all [overflow-wrap:anywhere]">
-                                    shafwanmumtaz0@gmail.com
-                                </a>
-                            </div>
-                        </div>
-                        <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-800/80">
-                            <button type="button" onclick="copyText('shafwanmumtaz0@gmail.com', 'Email shafwanmumtaz0@gmail.com')" class="flex-1 min-w-[120px] px-3.5 py-2 rounded-xl bg-cyan-500/15 hover:bg-cyan-500 text-cyan-300 hover:text-slate-950 border border-cyan-500/30 text-xs font-semibold transition-all flex items-center justify-center gap-1.5">
-                                <i class="fas fa-copy"></i>
-                                <span>Salin Email</span>
-                            </button>
-                            <a href="mailto:shafwanmumtaz0@gmail.com" class="flex-1 min-w-[120px] px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition-all flex items-center justify-center gap-1.5">
-                                <i class="fas fa-paper-plane"></i>
-                                <span>Kirim Pesan</span>
-                            </a>
-                        </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Email -->
+                <div class="p-5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-nightAlt flex flex-col justify-between gap-4 min-w-0">
+                    <div class="min-w-0">
+                        <span class="font-mono text-xs text-inkMuted dark:text-nightMuted block mb-1">Email</span>
+                        <a href="mailto:shafwanmumtaz0@gmail.com" class="text-base font-semibold text-ink dark:text-nightInk hover:text-pine dark:hover:text-tealBright break-all [overflow-wrap:anywhere]">
+                            shafwanmumtaz0@gmail.com
+                        </a>
                     </div>
-
-                    <!-- Kartu 2: GitHub -->
-                    <div class="p-4 sm:p-5 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-emerald-500/40 transition-all flex flex-col justify-between gap-4 min-w-0">
-                        <div class="flex items-start gap-3.5 min-w-0">
-                            <div class="w-11 h-11 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
-                                <i class="fab fa-github text-xl"></i>
-                            </div>
-                            <div class="min-w-0 flex-1">
-                                <span class="text-xs font-mono uppercase tracking-wider text-slate-400 block mb-1">Portofolio GitHub</span>
-                                <a href="https://github.com/shafwanmumtaz" target="_blank" rel="noopener noreferrer" class="text-sm sm:text-base font-semibold text-white hover:text-emerald-400 transition-colors block break-all [overflow-wrap:anywhere]">
-                                    https://github.com/shafwanmumtaz
-                                </a>
-                            </div>
-                        </div>
-                        <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-800/80">
-                            <button type="button" onclick="copyText('https://github.com/shafwanmumtaz', 'Link GitHub')" class="flex-1 min-w-[120px] px-3.5 py-2 rounded-xl bg-emerald-500/15 hover:bg-emerald-500 text-emerald-300 hover:text-slate-950 border border-emerald-500/30 text-xs font-semibold transition-all flex items-center justify-center gap-1.5">
-                                <i class="fas fa-copy"></i>
-                                <span>Salin URL</span>
-                            </button>
-                            <a href="https://github.com/shafwanmumtaz" target="_blank" rel="noopener noreferrer" class="flex-1 min-w-[120px] px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition-all flex items-center justify-center gap-1.5">
-                                <i class="fas fa-external-link-alt"></i>
-                                <span>Buka Profil</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Kartu 3: Telepon / WhatsApp -->
-                    <div class="p-4 sm:p-5 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-indigo-500/40 transition-all flex items-center gap-3.5 min-w-0">
-                        <div class="w-11 h-11 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center shrink-0">
-                            <i class="fas fa-phone-alt text-lg"></i>
-                        </div>
-                        <div class="min-w-0 flex-1">
-                            <span class="text-xs font-mono uppercase tracking-wider text-slate-400 block mb-0.5">Telepon / WhatsApp</span>
-                            <a href="tel:+6287844061327" class="text-sm sm:text-base font-semibold text-white hover:text-indigo-400 transition-colors block break-words">
-                                0878-4406-1327
-                            </a>
-                        </div>
-                        <button type="button" onclick="copyText('087844061327', 'Nomor Telepon')" aria-label="Salin Nomor Telepon" class="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors shrink-0" title="Salin Nomor">
-                            <i class="fas fa-copy text-xs"></i>
+                    <div class="flex flex-wrap gap-2 pt-3 border-t border-zinc-100 dark:border-zinc-800">
+                        <button type="button" onclick="copyText('shafwanmumtaz0@gmail.com', 'Email')" class="min-h-[44px] flex-1 px-3 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 hover:border-pine dark:hover:border-tealBright text-xs font-semibold text-ink dark:text-nightInk transition-colors">
+                            Salin Email
                         </button>
+                        <a href="mailto:shafwanmumtaz0@gmail.com" class="min-h-[44px] flex-1 px-3 py-2 rounded-md bg-pine dark:bg-tealBright text-white dark:text-night text-xs font-semibold flex items-center justify-center hover:opacity-90 transition-opacity">
+                            Kirim Email
+                        </a>
                     </div>
-
-                    <!-- Kartu 4: Domisili / Lokasi -->
-                    <div class="p-4 sm:p-5 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-cyan-500/40 transition-all flex items-center gap-3.5 min-w-0">
-                        <div class="w-11 h-11 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center shrink-0">
-                            <i class="fas fa-map-marker-alt text-lg"></i>
-                        </div>
-                        <div class="min-w-0 flex-1">
-                            <span class="text-xs font-mono uppercase tracking-wider text-slate-400 block mb-0.5">Domisili</span>
-                            <p class="text-sm sm:text-base font-semibold text-white break-words">
-                                Tangerang, Banten, Indonesia
-                            </p>
-                        </div>
-                    </div>
-
                 </div>
 
-                <!-- Notifikasi Toast Salin Teks -->
-                <div id="copy-toast" class="mt-6 text-center text-xs sm:text-sm font-mono text-emerald-400 opacity-0 transition-opacity duration-300 min-h-[1.25rem]">
-                    ✓ Berhasil disalin ke clipboard!
+                <!-- GitHub -->
+                <div class="p-5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-nightAlt flex flex-col justify-between gap-4 min-w-0">
+                    <div class="min-w-0">
+                        <span class="font-mono text-xs text-inkMuted dark:text-nightMuted block mb-1">GitHub</span>
+                        <a href="https://github.com/shafwanmumtaz" target="_blank" rel="noopener noreferrer" class="text-base font-semibold text-ink dark:text-nightInk hover:text-pine dark:hover:text-tealBright break-all [overflow-wrap:anywhere]">
+                            github.com/shafwanmumtaz
+                        </a>
+                    </div>
+                    <div class="flex flex-wrap gap-2 pt-3 border-t border-zinc-100 dark:border-zinc-800">
+                        <button type="button" onclick="copyText('https://github.com/shafwanmumtaz', 'URL GitHub')" class="min-h-[44px] flex-1 px-3 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 hover:border-pine dark:hover:border-tealBright text-xs font-semibold text-ink dark:text-nightInk transition-colors">
+                            Salin URL
+                        </button>
+                        <a href="https://github.com/shafwanmumtaz" target="_blank" rel="noopener noreferrer" class="min-h-[44px] flex-1 px-3 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 hover:border-pine dark:hover:border-tealBright text-xs font-semibold text-ink dark:text-nightInk flex items-center justify-center transition-colors">
+                            Buka Profil
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Telepon / WhatsApp -->
+                <div class="p-5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-nightAlt flex items-center justify-between gap-4 min-w-0">
+                    <div class="min-w-0">
+                        <span class="font-mono text-xs text-inkMuted dark:text-nightMuted block mb-1">Telepon / WhatsApp</span>
+                        <a href="tel:+6287844061327" class="text-base font-semibold text-ink dark:text-nightInk hover:text-pine dark:hover:text-tealBright">
+                            0878-4406-1327
+                        </a>
+                    </div>
+                    <button type="button" onclick="copyText('087844061327', 'Nomor Telepon')" class="min-h-[44px] px-4 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 hover:border-pine dark:hover:border-tealBright text-xs font-semibold text-ink dark:text-nightInk shrink-0 transition-colors">
+                        Salin
+                    </button>
+                </div>
+
+                <!-- Domisili -->
+                <div class="p-5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-nightAlt flex items-center min-w-0">
+                    <div>
+                        <span class="font-mono text-xs text-inkMuted dark:text-nightMuted block mb-1">Domisili</span>
+                        <p class="text-base font-semibold text-ink dark:text-nightInk">
+                            Tangerang, Banten, Indonesia
+                        </p>
+                    </div>
                 </div>
             </div>
+
+            <div id="copy-toast" role="status" aria-live="polite" class="mt-4 text-sm font-mono text-pine dark:text-tealBright min-h-[1.5rem]"></div>
         </section>
     </main>
 
     <!-- ================= FOOTER ================= -->
-    <footer class="border-t border-slate-800/80 py-8 text-center text-slate-500 text-sm">
-        <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p>&copy; <span id="current-year"></span> <strong class="text-slate-300">Shafwan Mumtaz</strong> • Tangerang, Banten.</p>
-            <p class="font-mono text-xs text-slate-500">Teknik Informatika • Universitas Pamulang (UNPAM)</p>
+    <footer class="border-t border-zinc-200 dark:border-zinc-800 py-8 text-sm text-inkMuted dark:text-nightMuted">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-3">
+            <p>&copy; <span id="current-year"></span> Shafwan Mumtaz, Tangerang.</p>
+            <p class="font-mono text-xs">Teknik Informatika, Universitas Pamulang</p>
         </div>
     </footer>
 
     <!-- ================= MODAL DETAIL STUDI KASUS ================= -->
-    <div id="project-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/85 backdrop-blur-sm">
-        <div class="glass-card rounded-2xl max-w-2xl w-full p-6 sm:p-8 relative border border-cyan-500/40 shadow-2xl transform transition-all max-h-[90vh] overflow-y-auto">
-            <button onclick="closeProjectModal()" aria-label="Tutup Modal" class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition-colors">
-                <i class="fas fa-times"></i>
+    <div id="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-zinc-950/75">
+        <div class="rounded-lg max-w-2xl w-full p-6 sm:p-8 relative bg-white dark:bg-nightAlt border border-zinc-200 dark:border-zinc-700 max-h-[90vh] overflow-y-auto">
+            <button type="button" id="modal-close-btn" onclick="closeProjectModal()" aria-label="Tutup detail studi kasus" class="min-h-[44px] min-w-[44px] absolute top-4 right-4 rounded-md border border-zinc-300 dark:border-zinc-700 text-ink dark:text-nightInk hover:border-pine dark:hover:border-tealBright flex items-center justify-center transition-colors">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M18 6L6 18M6 6l12 12"></path>
+                </svg>
             </button>
-            
-            <div class="flex items-center gap-2 mb-1">
-                <span id="modal-badge" class="text-xs font-mono px-2.5 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">Kategori</span>
-                <span id="modal-file" class="text-xs font-mono text-slate-400">file.ext</span>
+
+            <div class="flex flex-wrap items-center gap-2 pr-12 mb-2">
+                <span id="modal-badge" class="font-mono text-xs px-2.5 py-0.5 rounded bg-paperAlt dark:bg-night text-pine dark:text-tealBright border border-zinc-200 dark:border-zinc-700">Kategori</span>
+                <span id="modal-file" class="font-mono text-xs text-inkMuted dark:text-nightMuted">file.ext</span>
             </div>
-            
-            <h3 id="modal-title" class="text-xl sm:text-2xl font-bold text-white mt-2 mb-5">Judul Studi Kasus</h3>
-            
-            <!-- Struktur Studi Kasus: Tantangan, Metodologi/Tools, Hasil/Dampak -->
+
+            <h3 id="modal-title" class="font-serif text-xl sm:text-2xl font-semibold text-ink dark:text-nightInk mb-5 pr-8">Judul Studi Kasus</h3>
+
             <div class="space-y-4 text-sm">
-                <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
-                    <h4 class="text-xs font-mono uppercase tracking-wider text-rose-400 mb-1.5 flex items-center gap-2">
-                        <i class="fas fa-exclamation-circle"></i> 1. Tantangan & Masalah Data
-                    </h4>
-                    <p id="modal-challenge" class="text-slate-300 leading-relaxed"></p>
+                <div class="p-4 rounded-md bg-paperAlt dark:bg-night border border-zinc-200 dark:border-zinc-800">
+                    <h4 class="font-mono text-xs uppercase tracking-wider text-ink dark:text-nightInk mb-1.5">1. Tantangan &amp; Masalah Data</h4>
+                    <p id="modal-challenge" class="text-inkMuted dark:text-nightMuted leading-relaxed"></p>
                 </div>
 
-                <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
-                    <h4 class="text-xs font-mono uppercase tracking-wider text-cyan-400 mb-1.5 flex items-center gap-2">
-                        <i class="fas fa-cogs"></i> 2. Metodologi & Tools yang Digunakan
-                    </h4>
-                    <p id="modal-methodology" class="text-slate-300 leading-relaxed"></p>
+                <div class="p-4 rounded-md bg-paperAlt dark:bg-night border border-zinc-200 dark:border-zinc-800">
+                    <h4 class="font-mono text-xs uppercase tracking-wider text-ink dark:text-nightInk mb-1.5">2. Metodologi &amp; Tools</h4>
+                    <p id="modal-methodology" class="text-inkMuted dark:text-nightMuted leading-relaxed"></p>
                 </div>
 
-                <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
-                    <h4 class="text-xs font-mono uppercase tracking-wider text-emerald-400 mb-1.5 flex items-center gap-2">
-                        <i class="fas fa-check-circle"></i> 3. Hasil & Dampak Analisis
-                    </h4>
-                    <p id="modal-impact" class="text-slate-300 leading-relaxed"></p>
+                <div class="p-4 rounded-md bg-paperAlt dark:bg-night border border-zinc-200 dark:border-zinc-800">
+                    <h4 class="font-mono text-xs uppercase tracking-wider text-ink dark:text-nightInk mb-1.5">3. Hasil &amp; Dampak</h4>
+                    <p id="modal-impact" class="text-inkMuted dark:text-nightMuted leading-relaxed"></p>
                 </div>
             </div>
 
             <div class="mt-5 mb-6">
-                <h4 class="text-xs font-mono text-slate-400 uppercase mb-2">Tech Stack & Tags:</h4>
+                <h4 class="font-mono text-xs text-inkMuted dark:text-nightMuted uppercase mb-2">Tech Stack:</h4>
                 <div id="modal-tags" class="flex flex-wrap gap-2 font-mono text-xs"></div>
             </div>
 
-            <div class="flex flex-col sm:flex-row justify-between items-center gap-3 pt-4 border-t border-slate-800">
-                <a id="modal-github-link" href="https://github.com/shafwanmumtaz" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 text-slate-950 font-bold text-sm hover:opacity-95 transition-all flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/20">
-                    <i class="fab fa-github text-base"></i>
-                    <span>Lihat di GitHub</span>
-                    <i class="fas fa-external-link-alt text-xs"></i>
+            <div class="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 pt-4 border-t border-zinc-200 dark:border-zinc-800">
+                <a id="modal-github-link" href="https://github.com/shafwanmumtaz" target="_blank" rel="noopener noreferrer" class="min-h-[44px] px-5 py-2.5 rounded-md bg-pine dark:bg-tealBright text-white dark:text-night font-semibold text-sm hover:opacity-90 transition-opacity flex items-center justify-center">
+                    Lihat Repositori di GitHub
                 </a>
-                <button onclick="closeProjectModal()" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-slate-800 text-slate-300 hover:text-white text-sm font-medium transition-colors">
-                    Tutup Detail
+                <button type="button" onclick="closeProjectModal()" class="min-h-[44px] px-5 py-2.5 rounded-md border border-zinc-300 dark:border-zinc-700 text-ink dark:text-nightInk text-sm font-medium hover:border-pine dark:hover:border-tealBright transition-colors">
+                    Tutup
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- ================= JAVASCRIPT INTERAKTIVITAS & ANIMASI ================= -->
+    <!-- ================= JAVASCRIPT ================= -->
     <script>
-        // 1. Set Tahun Otomatis di Footer
         document.getElementById('current-year').textContent = new Date().getFullYear();
 
-        // 2. Toggle Menu Mobile
+        // Toggle Tema Terang / Gelap
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeLabel = document.getElementById('theme-label');
+
+        function syncThemeUI() {
+            const isDark = document.documentElement.classList.contains('dark');
+            themeToggle.setAttribute('aria-pressed', String(isDark));
+            themeLabel.textContent = isDark ? 'Terang' : 'Gelap';
+        }
+        syncThemeUI();
+
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.documentElement.classList.toggle('dark');
+            try {
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            } catch (e) {}
+            syncThemeUI();
+        });
+
+        // Toggle Menu Mobile
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const mobileLinks = document.querySelectorAll('.mobile-link');
 
         mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
+            const isHidden = mobileMenu.classList.toggle('hidden');
+            mobileMenuBtn.setAttribute('aria-expanded', String(!isHidden));
         });
 
         mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.add('hidden');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
             });
         });
 
-        // 3. Animasi Ketik (Typing Effect) pada Hero Section
-        const roles = [
-            "Aspiring Data Analyst",
-            "Informatics Engineering Student",
-            "Python & Excel Data Enthusiast",
-            "Operational & Logistics Data Specialist"
-        ];
-        let roleIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        const typedTextElement = document.getElementById('typed-text');
-
-        function typeEffect() {
-            const currentRole = roles[roleIndex];
-            
-            if (isDeleting) {
-                typedTextElement.textContent = currentRole.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                typedTextElement.textContent = currentRole.substring(0, charIndex + 1);
-                charIndex++;
-            }
-
-            let typingSpeed = isDeleting ? 40 : 90;
-
-            if (!isDeleting && charIndex === currentRole.length) {
-                typingSpeed = 1800;
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                roleIndex = (roleIndex + 1) % roles.length;
-                typingSpeed = 400;
-            }
-
-            setTimeout(typeEffect, typingSpeed);
-        }
-
-        // 4. Animasi Scroll Reveal & Skill Bars menggunakan IntersectionObserver
-        const revealElements = document.querySelectorAll('.reveal');
-        const skillBars = document.querySelectorAll('.skill-bar');
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    
-                    if (entry.target.querySelector('#skills-container')) {
-                        skillBars.forEach(bar => {
-                            const targetWidth = bar.getAttribute('data-width');
-                            bar.style.width = targetWidth;
-                        });
-                    }
-                }
-            });
-        }, { threshold: 0.12 });
-
-        revealElements.forEach(el => observer.observe(el));
-
-        // 5. Filter Kategori Proyek
+        // Filter Kategori Proyek
         const filterBtns = document.querySelectorAll('.filter-btn');
         const projectCards = document.querySelectorAll('.project-card');
+        const projectsEmpty = document.getElementById('projects-empty');
 
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 filterBtns.forEach(b => {
-                    b.classList.remove('bg-cyan-500', 'text-slate-950');
-                    b.classList.add('glass', 'text-slate-300');
+                    b.setAttribute('aria-pressed', 'false');
+                    b.classList.remove('bg-pine', 'dark:bg-tealBright', 'text-white', 'dark:text-night', 'font-semibold');
+                    b.classList.add('border', 'border-zinc-300', 'dark:border-zinc-700', 'bg-white', 'dark:bg-nightAlt', 'text-ink', 'dark:text-nightInk', 'font-medium');
                 });
-                btn.classList.remove('glass', 'text-slate-300');
-                btn.classList.add('bg-cyan-500', 'text-slate-950');
+
+                btn.setAttribute('aria-pressed', 'true');
+                btn.classList.remove('border', 'border-zinc-300', 'dark:border-zinc-700', 'bg-white', 'dark:bg-nightAlt', 'text-ink', 'dark:text-nightInk', 'font-medium');
+                btn.classList.add('bg-pine', 'dark:bg-tealBright', 'text-white', 'dark:text-night', 'font-semibold');
 
                 const filterValue = btn.getAttribute('data-filter');
+                let visibleCount = 0;
 
                 projectCards.forEach(card => {
                     if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
                         card.style.display = 'flex';
-                        setTimeout(() => {
-                            card.style.opacity = '1';
-                            card.style.transform = 'translateY(0)';
-                        }, 50);
+                        visibleCount++;
                     } else {
-                        card.style.opacity = '0';
-                        card.style.transform = 'translateY(15px)';
-                        setTimeout(() => {
-                            card.style.display = 'none';
-                        }, 300);
+                        card.style.display = 'none';
                     }
                 });
+
+                projectsEmpty.classList.toggle('hidden', visibleCount > 0);
             });
         });
 
-        // 6. Data Studi Kasus Lengkap & Modal Interaktif
+        // Data Studi Kasus Lengkap
         const studyCases = [
             {
                 badge: "Python & Data Mining",
                 file: "Data analiys Shafwan Mumtaz 241011450529 UTS.ipynb & file csv shafwan.csv",
                 title: "Residential Property Data Cleansing & EDA",
                 githubUrl: "https://github.com/shafwanmumtaz/residential-property-eda",
-                challenge: "Dataset mentah properti (file csv shafwan.csv) mengandung nilai kosong (missing values) tidak standar (seperti string 'na', '--', atau karakter non-numerik) serta ketidakkonsistenan tipe data pada atribut PID, ST_NUM, ST_NAME, OWN_OCCUPIED, NUM_BEDROOMS, NUM_BATH, dan SQ_FT.",
-                methodology: "Menggunakan Python (Pandas, NumPy, Matplotlib, Seaborn) di lingkungan Jupyter Notebook untuk mendeteksi anomali nilai hilang, melakukan imputasi data numerik/kategorikal, memvalidasi status kepemilikan hunian (OWN_OCCUPIED), serta mengonversi tipe data agar siap dianalisis.",
-                impact: "Menghasilkan dataset properti yang bersih, konsisten, dan terstruktur sehingga mempermudah eksplorasi pola jumlah kamar, luas bangunan (SQ_FT), dan distribusi kepemilikan properti secara akurat.",
+                challenge: "Dataset mentah properti (file csv shafwan.csv) mengandung nilai kosong (missing values) tidak standar seperti string 'na', '--', atau karakter non-numerik, serta ketidakkonsistenan tipe data pada atribut PID, ST_NUM, ST_NAME, OWN_OCCUPIED, NUM_BEDROOMS, NUM_BATH, dan SQ_FT.",
+                methodology: "Menggunakan Python (Pandas, NumPy, Matplotlib, Seaborn) di Jupyter Notebook untuk mendeteksi anomali nilai hilang, melakukan imputasi data numerik/kategorikal, memvalidasi status kepemilikan hunian (OWN_OCCUPIED), serta mengonversi tipe data agar siap dianalisis.",
+                impact: "Menghasilkan dataset properti yang bersih dan konsisten sehingga mempermudah eksplorasi pola jumlah kamar, luas bangunan (SQ_FT), dan distribusi kepemilikan properti.",
                 tags: ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn", "Data Cleaning", "EDA"]
             },
             {
@@ -1138,8 +828,8 @@ df_clean = df.dropna().drop_duplicates()
                 title: "Netflix Shows & Movies Exploratory Analysis",
                 githubUrl: "https://github.com/shafwanmumtaz/netflix-shows-eda",
                 challenge: "Dataset katalog tayangan global Netflix memiliki ribuan entri gabungan antara Movie dan TV Show dengan nilai hilang pada kolom director, cast, dan country serta format durasi yang berbeda (menit vs jumlah season).",
-                methodology: "Melakukan pembersihan data dan ekstraksi fitur menggunakan Python & Pandas, memisahkan durasi film dan serial TV, mengekstrak tahun penambahan konten, serta memvisualisasikan tren distribusi menggunakan Matplotlib dan Seaborn.",
-                impact: "Memetakan pertumbuhan rilis konten tahunan, negara kontributor terbesar, serta komposisi rating usia penonton untuk memahami strategi ekspansi katalog global.",
+                methodology: "Melakukan pembersihan data dan ekstraksi fitur menggunakan Python dan Pandas, memisahkan durasi film dan serial TV, mengekstrak tahun penambahan konten, serta memvisualisasikan tren distribusi menggunakan Matplotlib dan Seaborn.",
+                impact: "Memetakan pertumbuhan rilis konten tahunan, negara kontributor terbesar, serta komposisi rating usia penonton.",
                 tags: ["Python", "Pandas", "Seaborn", "Kaggle Dataset", "Data Visualization", "EDA"]
             },
             {
@@ -1147,9 +837,9 @@ df_clean = df.dropna().drop_duplicates()
                 file: "PivotTable_Sales_Data.xlsx",
                 title: "Corporate Sales Pivot & Department Performance Analysis",
                 githubUrl: "https://github.com/shafwanmumtaz/sales-pivot-analytics",
-                challenge: "Manajemen membutuhkan visibilitas menyeluruh terhadap ratusan transaksi pengadaan perangkat IT sepanjang tahun 2024 yang tersebar di lima departemen berbeda (IT, Marketing, Sales, HR, dan Finance) dengan beragam kategori produk.",
+                challenge: "Manajemen membutuhkan visibilitas terhadap transaksi pengadaan perangkat IT sepanjang tahun 2024 yang tersebar di lima departemen berbeda (IT, Marketing, Sales, HR, dan Finance) dengan beragam kategori produk.",
                 methodology: "Membangun tabel analisis interaktif menggunakan Pivot Table di Microsoft Excel untuk mengelompokkan dan membandingkan volume kuantitas serta nilai transaksi berdasarkan departemen dan kategori produk (Laptop, Monitor, Keyboard, Phone, Tablet, dan Mouse).",
-                impact: "Memetakan pola kebutuhan perangkat keras di tiap departemen (seperti tingginya permintaan Laptop dan Monitor di divisi IT & Sales) untuk mendukung perencanaan anggaran pengadaan tahun berikutnya.",
+                impact: "Memetakan pola kebutuhan perangkat keras di tiap departemen (seperti tingginya permintaan Laptop dan Monitor di divisi IT & Sales) untuk perencanaan anggaran pengadaan.",
                 tags: ["Pivot Table", "Microsoft Excel", "Cross-Department Analysis", "Procurement Analytics", "2024 Data"]
             },
             {
@@ -1157,9 +847,9 @@ df_clean = df.dropna().drop_duplicates()
                 file: "PPT 1.xlsx",
                 title: "Employee Sales Data Cleaning & Standardization",
                 githubUrl: "https://github.com/shafwanmumtaz/excel-data-cleaning",
-                challenge: "Data transaksi penjualan karyawan kuartalan (Q1 hingga Q4) memiliki banyak permasalahan kualitas data seperti entri duplikat, spasi berlebih pada teks, penulisan huruf kapital yang tidak seragam, format tanggal yang berbeda-beda, serta kolom status transaksi yang kosong.",
-                methodology: "Menerapkan fungsi pembersihan dan agregasi lanjutan di Microsoft Excel meliputi TRIM (menghapus spasi berlebih), PROPER (standarisasi teks), TEXT (penyeragaman format tanggal), IF (pengisian logika status kosong), serta COUNTIF, AVERAGE, MAX, dan MIN untuk ringkasan statistik.",
-                impact: "Meningkatkan integritas laporan penjualan tahunan Q1–Q4 hingga 100% bebas duplikasi dan format kacau, sehingga perhitungan rata-rata penjualan serta performa tertinggi/terendah per kuartal dapat disajikan secara presisi.",
+                challenge: "Data transaksi penjualan karyawan kuartalan (Q1 hingga Q4) memiliki entri duplikat, spasi berlebih pada teks, penulisan huruf kapital yang tidak seragam, format tanggal berbeda, serta kolom status transaksi yang kosong.",
+                methodology: "Menerapkan fungsi pembersihan dan agregasi di Microsoft Excel meliputi TRIM (menghapus spasi berlebih), PROPER (standarisasi teks), TEXT (penyeragaman format tanggal), IF (pengisian logika status kosong), serta COUNTIF, AVERAGE, MAX, dan MIN untuk ringkasan statistik.",
+                impact: "Menghilangkan duplikasi dan ketidakkonsistenan format pada laporan penjualan kuartalan Q1-Q4 sehingga perhitungan rata-rata dan performa per kuartal menjadi akurat.",
                 tags: ["Microsoft Excel", "TRIM & PROPER", "IF & COUNTIF", "Data Standardization", "Q1-Q4 Sales"]
             },
             {
@@ -1168,8 +858,8 @@ df_clean = df.dropna().drop_duplicates()
                 title: "Automated File Organizer CLI Tool (rapikan.py)",
                 githubUrl: "https://github.com/shafwanmumtaz/python-automation-scripts",
                 challenge: "Penumpukan berbagai jenis file mentah (dataset CSV/Excel, dokumen laporan, gambar, dan skrip) dalam satu direktori kerja memperlambat pencarian file saat mengerjakan proyek analisis data.",
-                methodology: "Mengembangkan skrip otomasi berbasis Python (rapikan.py) memanfaatkan modul bawaan OS dan Shutil untuk memindai ekstensi file secara otomatis, membuat folder kategori jika belum tersedia, dan memindahkan file ke direktori yang sesuai.",
-                impact: "Menghemat waktu pengelolaan direktori kerja secara signifikan dan menjaga struktur folder proyek tetap rapi serta terstandarisasi tanpa intervensi manual.",
+                methodology: "Mengembangkan skrip otomasi berbasis Python (rapikan.py) memanfaatkan modul bawaan os dan shutil untuk memindai ekstensi file, membuat folder kategori jika belum tersedia, dan memindahkan file ke direktori yang sesuai.",
+                impact: "Menjaga struktur folder kerja tetap rapi dan terstandarisasi tanpa pemindahan manual.",
                 tags: ["Python", "OS Module", "Shutil", "File Automation", "CLI Tool"]
             },
             {
@@ -1177,14 +867,15 @@ df_clean = df.dropna().drop_duplicates()
                 file: "Rekap Operasional PT Mumtaz Catering",
                 title: "Catering & Logistics Portion Reporting System",
                 githubUrl: "https://github.com/shafwanmumtaz/catering-operations-report",
-                challenge: "Pencatatan distribusi porsi makan harian untuk klien korporat dengan jadwal shift beragam (Lunch, Dinner, Supper) berisiko mengalami selisih hitung dan pemborosan stok bahan baku jika tidak direkap secara sistematis.",
+                challenge: "Pencatatan distribusi porsi makan harian untuk klien korporat dengan jadwal shift beragam (Lunch, Dinner, Supper) berisiko mengalami selisih hitung dan pemborosan stok bahan baku jika tidak direkap sistematis.",
                 methodology: "Melakukan digitalisasi dan rekapitulasi terstruktur atas data distribusi harian dan inventaris stok menggunakan Microsoft Excel, termasuk audit volume pesanan per periode untuk klien B2B seperti Pakons Prime Hotel.",
-                impact: "Tercatat dan tervalidasinya distribusi 516 porsi makan karyawan secara akurat untuk klien Pakons Prime Hotel, meningkatkan efisiensi penggunaan bahan baku serta memperlancar pelaporan penagihan klien.",
+                impact: "Tercatat dan tervalidasinya distribusi 516 porsi makan karyawan untuk klien Pakons Prime Hotel guna mendukung akurasi bahan baku dan pelaporan penagihan klien.",
                 tags: ["Operational Analytics", "Microsoft Excel", "Inventory Tracking", "B2B Reporting", "PT Mumtaz Catering"]
             }
         ];
 
         const modal = document.getElementById('project-modal');
+        const modalCloseBtn = document.getElementById('modal-close-btn');
         const modalBadge = document.getElementById('modal-badge');
         const modalFile = document.getElementById('modal-file');
         const modalTitle = document.getElementById('modal-title');
@@ -1193,8 +884,10 @@ df_clean = df.dropna().drop_duplicates()
         const modalImpact = document.getElementById('modal-impact');
         const modalTags = document.getElementById('modal-tags');
         const modalGithubLink = document.getElementById('modal-github-link');
+        let lastFocusedTrigger = null;
 
-        function openStudyCaseModal(index) {
+        function openStudyCaseModal(index, triggerEl) {
+            lastFocusedTrigger = triggerEl || document.activeElement;
             const data = studyCases[index];
             modalBadge.textContent = data.badge;
             modalFile.textContent = data.file;
@@ -1203,22 +896,26 @@ df_clean = df.dropna().drop_duplicates()
             modalMethodology.textContent = data.methodology;
             modalImpact.textContent = data.impact;
             modalGithubLink.href = data.githubUrl;
-            
+
             modalTags.innerHTML = '';
             data.tags.forEach(tag => {
                 const span = document.createElement('span');
-                span.className = 'px-2.5 py-1 rounded-md bg-slate-800 text-cyan-400 border border-slate-700';
+                span.className = 'px-2.5 py-1 rounded bg-paperAlt dark:bg-night text-inkMuted dark:text-nightMuted border border-zinc-200 dark:border-zinc-700';
                 span.textContent = tag;
                 modalTags.appendChild(span);
             });
 
             modal.classList.remove('hidden');
             modal.classList.add('flex');
+            modalCloseBtn.focus();
         }
 
         function closeProjectModal() {
             modal.classList.add('hidden');
             modal.classList.remove('flex');
+            if (lastFocusedTrigger && typeof lastFocusedTrigger.focus === 'function') {
+                lastFocusedTrigger.focus();
+            }
         }
 
         modal.addEventListener('click', (e) => {
@@ -1227,124 +924,48 @@ df_clean = df.dropna().drop_duplicates()
             }
         });
 
-        // 7. Fungsi Salin Teks (Email, GitHub URL, Nomor Telepon)
-        function copyText(textValue, label) {
-            const tempInput = document.createElement("input");
-            tempInput.value = textValue;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            document.execCommand("copy");
-            document.body.removeChild(tempInput);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                closeProjectModal();
+            }
+        });
 
+        // Salin Teks dengan Clipboard API + fallback
+        let toastTimer = null;
+        function showToast(message) {
             const toast = document.getElementById('copy-toast');
-            toast.textContent = `✓ ${label} berhasil disalin ke clipboard!`;
-            toast.style.opacity = '1';
-            setTimeout(() => {
-                toast.style.opacity = '0';
+            toast.textContent = message;
+            if (toastTimer) clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                toast.textContent = '';
             }, 3000);
         }
 
-        // 8. Animasi Canvas Jaringan Node Data Interaktif (Background)
-        const canvas = document.getElementById('network-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        let mouse = { x: null, y: null, radius: 130 };
-
-        window.addEventListener('mousemove', (e) => {
-            mouse.x = e.x;
-            mouse.y = e.y;
-        });
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            initParticles();
-        }
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 1;
-                this.speedX = (Math.random() - 0.5) * 0.7;
-                this.speedY = (Math.random() - 0.5) * 0.7;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-
-                if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
-                if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
-            }
-            draw() {
-                ctx.fillStyle = 'rgba(6, 182, 212, 0.55)';
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
+        function copyText(textValue, label) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(textValue).then(() => {
+                    showToast(label + ' disalin ke clipboard.');
+                }).catch(() => {
+                    fallbackCopy(textValue, label);
+                });
+            } else {
+                fallbackCopy(textValue, label);
             }
         }
 
-        function initParticles() {
-            particles = [];
-            const numberOfParticles = Math.min((canvas.width * canvas.height) / 16000, 75);
-            for (let i = 0; i < numberOfParticles; i++) {
-                particles.push(new Particle());
+        function fallbackCopy(textValue, label) {
+            const tempInput = document.createElement('input');
+            tempInput.value = textValue;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            try {
+                document.execCommand('copy');
+                showToast(label + ' disalin ke clipboard.');
+            } catch (e) {
+                showToast('Gagal menyalin ' + label + '.');
             }
+            document.body.removeChild(tempInput);
         }
-
-        function connectParticles() {
-            for (let a = 0; a < particles.length; a++) {
-                for (let b = a; b < particles.length; b++) {
-                    let dx = particles[a].x - particles[b].x;
-                    let dy = particles[a].y - particles[b].y;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < 130) {
-                        let opacity = 1 - (distance / 130);
-                        ctx.strokeStyle = `rgba(6, 182, 212, ${opacity * 0.22})`;
-                        ctx.lineWidth = 1;
-                        ctx.beginPath();
-                        ctx.moveTo(particles[a].x, particles[a].y);
-                        ctx.lineTo(particles[b].x, particles[b].y);
-                        ctx.stroke();
-                    }
-                }
-
-                // Koneksi interaktif dengan kursor mouse
-                if (mouse.x !== null && mouse.y !== null) {
-                    let dxMouse = particles[a].x - mouse.x;
-                    let dyMouse = particles[a].y - mouse.y;
-                    let distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
-                    if (distMouse < mouse.radius) {
-                        ctx.strokeStyle = `rgba(16, 185, 129, 0.35)`;
-                        ctx.lineWidth = 1.2;
-                        ctx.beginPath();
-                        ctx.moveTo(particles[a].x, particles[a].y);
-                        ctx.lineTo(mouse.x, mouse.y);
-                        ctx.stroke();
-                    }
-                }
-            }
-        }
-
-        function animateCanvas() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
-            }
-            connectParticles();
-            requestAnimationFrame(animateCanvas);
-        }
-
-        window.addEventListener('resize', resizeCanvas);
-
-        // Jalankan animasi setelah halaman dimuat
-        window.onload = function() {
-            typeEffect();
-            resizeCanvas();
-            animateCanvas();
-        };
     </script>
 </body>
 </html>
